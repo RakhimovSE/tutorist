@@ -7,6 +7,18 @@
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
-    <h1>Current date: <%= new Date() %></h1>
+    <% if (account) { %>
+      <img src="<%= account.profileUrl %>"/><br/>
+      <span><%= `${account.firstName} ${account.lastName}` %></span>
+    <% } %>
+    <% if (Object.keys(params).length) { %>
+      <h2>GET-params</h2>
+      <ul>
+        <% for (let [key, value] of Object.entries(params)) { %>
+          <li><%= key %> - <%= value %></li>
+        <% } %>
+      </ul>
+    <% } %>
+    <a href="<%= googleUrl %>">Login with Google</a>
   </body>
 </html>
