@@ -7,18 +7,15 @@
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+    <p><a href="<%= googleUrl %>">Login with Google</a></p>
     <% if (account) { %>
-      <img src="<%= account.profileUrl %>"/><br/>
-      <span><%= `${account.firstName} ${account.lastName}` %></span>
+      <p><%= `${account.firstName} ${account.lastName}` %></p>
+      <p><a href="<%= `mailto:${account.email}` %>"><%= account.email %></a></p>
+      <img src="<%= account.profileUrl %>"/>
+      <%- include('obj-list', { name: 'Аккаунт', obj: account }); %>
     <% } %>
     <% if (Object.keys(params).length) { %>
-      <h2>GET-params</h2>
-      <ul>
-        <% for (let [key, value] of Object.entries(params)) { %>
-          <li><%= key %> - <%= value %></li>
-        <% } %>
-      </ul>
+      <%- include('obj-list', { name: 'GET-параметры', obj: params }); %>
     <% } %>
-    <a href="<%= googleUrl %>">Login with Google</a>
   </body>
 </html>

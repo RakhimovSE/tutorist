@@ -65,7 +65,14 @@ async function getGoogleAccountFromCode(code) {
     personFields: 'emailAddresses,names,photos',
   });
 
-  return res.data;
+  return {
+    id: res.data.resourceName.split('/')[1],
+    source: 'google',
+    firstName: res.data.names[0].givenName,
+    lastName: res.data.names[0].familyName,
+    profileUrl: res.data.photos[0].url.replace('s100', 's1000'),
+    email: res.data.emailAddresses[0].value
+  };
 }
 
 module.exports = {

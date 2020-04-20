@@ -10,14 +10,7 @@ router.get('/', async function (req, res, next) {
   let googleUrl = urlGoogle();
 
   if (params.code) {
-    await getGoogleAccountFromCode(params.code)
-      .then(res => {
-        account = {
-          firstName: res.names[0].givenName,
-          lastName: res.names[0].familyName,
-          profileUrl: res.photos[0].url
-        };
-      })
+    account = await getGoogleAccountFromCode(params.code)
       .catch(console.error);
   }
 
