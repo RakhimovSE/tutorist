@@ -20,7 +20,7 @@ function createConnection() {
   return new google.auth.OAuth2(
     dotenv.GOOGLE_CLIENT_ID,
     dotenv.GOOGLE_CLIENT_SECRET,
-    dotenv.GOOGLE_REDIRECT_URL
+    dotenv.GOOGLE_REDIRECT_URL,
   );
 }
 
@@ -28,7 +28,7 @@ function getConnectionUrl(auth) {
   return auth.generateAuthUrl({
     access_type: 'offline',
     prompt: 'consent',
-    scope: scopes
+    scope: scopes,
   });
 }
 
@@ -70,12 +70,12 @@ async function getGoogleAccountFromCode(code) {
     source: 'google',
     firstName: res.data.names[0].givenName,
     lastName: res.data.names[0].familyName,
+    email: res.data.emailAddresses[0].value,
     profileUrl: res.data.photos[0].url.replace('s100', 's1000'),
-    email: res.data.emailAddresses[0].value
   };
 }
 
 module.exports = {
   urlGoogle,
-  getGoogleAccountFromCode
+  getGoogleAccountFromCode,
 }

@@ -18,7 +18,7 @@ router.get('/', async function (req, res, next) {
     title: 'Express',
     googleUrl,
     params,
-    account
+    account,
   };
 
   res.render('index', data);
