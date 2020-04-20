@@ -66,12 +66,12 @@ async function getGoogleAccountFromCode(code) {
   });
 
   return {
-    id: res.data.resourceName.split('/')[1],
-    source: 'google',
     firstName: res.data.names[0].givenName,
     lastName: res.data.names[0].familyName,
     email: res.data.emailAddresses[0].value,
     profileUrl: res.data.photos[0].url.replace('s100', 's1000'),
+    accountId: res.data.resourceName.split('/')[1],
+    accountType: 'google',
   };
 }
 
