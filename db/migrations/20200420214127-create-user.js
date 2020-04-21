@@ -23,12 +23,10 @@ module.exports = {
       profileUrl: {
         type: Sequelize.STRING
       },
-      accountId: {
-        allowNull: false,
+      profileId: {
         type: Sequelize.STRING
       },
-      accountType: {
-        allowNull: false,
+      profileProvider: {
         type: Sequelize.STRING
       },
       createdAt: {
