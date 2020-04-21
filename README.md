@@ -22,6 +22,11 @@ Tutorist - платформа для комплексного ведения з�
     VKONTAKTE_APP_SECRET=<VKONTAKTE_APP_SECRET>
     VKONTAKTE_CALLBACK_URL=http://localhost:3000/auth/vkontakte/callback
     
+    # YANDEX AUTH
+    YANDEX_CLIENT_ID=<YANDEX_CLIENT_ID>
+    YANDEX_CLIENT_SECRET=<YANDEX_CLIENT_SECRET>
+    YANDEX_CALLBACK_URL=http://localhost:3000/auth/yandex/callback
+    
     # POSTGRES DEVELOPMENT
     DB_USERNAME_DEV=<DB_USERNAME_DEV>
     DB_PASSWORD_DEV=<DB_PASSWORD_DEV>

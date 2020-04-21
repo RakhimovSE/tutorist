@@ -21,6 +21,16 @@ const getSerializedProfile = {
       profileProvider: profile.provider,
     }
   ),
+  'yandex': profile => (
+    {
+      firstName: profile.name.familyName,
+      lastName: profile.name.givenName,
+      email: profile.emails[0].value,
+      photoUrl: `https://avatars.mds.yandex.net/get-yapic/${profile._json.default_avatar_id}/islands-200`,
+      profileId: profile.id,
+      profileProvider: profile.provider,
+    }
+  ),
 };
 
 exports.create = async (profile) => {

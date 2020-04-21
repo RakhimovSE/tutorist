@@ -7,6 +7,7 @@ const userController = require('../db/controllers/user.controller');
 
 const { Strategy: GoogleStrategy } = require('passport-google-oauth20');
 const { Strategy: VKontakteStrategy } = require('passport-vkontakte');
+const { Strategy: YandexStrategy } = require('passport-yandex');
 
 /***************/
 /** СТРАТЕГИИ **/
@@ -21,10 +22,10 @@ passport.use(new GoogleStrategy({
       'https://www.googleapis.com/auth/userinfo.email',
     ],
   },
-  (accessToken, refreshToken, profile, cb) => {
+  (accessToken, refreshToken, profile, done) => {
     userController.create(profile).then(([user, created]) => {
-      return cb(null, user);
-    })
+      return done(null, user);
+    });
   }));
 
 passport.use(new VKontakteStrategy({
@@ -34,10 +35,22 @@ passport.use(new VKontakteStrategy({
     scope: ['email'],
     profileFields: ['photo_max'],
   },
-  (accessToken, refreshToken, params, profile, cb) => {
+  (accessToken, refreshToken, params, profile, done) => {
     const profileWithEmail = { email: params.email, ...profile };
     userController.create(profileWithEmail).then(([user, created]) => {
-      return cb(null, user);
+      return done(null, user);
+    });
+  }
+));
+
+passport.use(new YandexStrategy({
+    clientID: dotenv.YANDEX_CLIENT_ID,
+    clientSecret: dotenv.YANDEX_CLIENT_SECRET,
+    callbackURL: dotenv.YANDEX_CALLBACK_URL,
+  },
+  (accessToken, refreshToken, profile, done) => {
+    userController.create(profile).then(([user, created]) => {
+      return done(null, user);
     })
   }
 ));
@@ -72,6 +85,15 @@ router.get('/vkontakte', passport.authenticate('vkontakte'));
 router.get(
   '/vkontakte/callback',
   passport.authenticate('vkontakte', { failureRedirect: '/login' }),
+  (req, res) => {
+    res.redirect('/');
+  });
+
+router.get('/yandex', passport.authenticate('yandex'));
+
+router.get(
+  '/yandex/callback',
+  passport.authenticate('yandex', { failureRedirect: '/login' }),
   (req, res) => {
     res.redirect('/');
   });
