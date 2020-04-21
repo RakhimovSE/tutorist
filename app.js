@@ -1,8 +1,7 @@
 let createError = require('http-errors');
 let express = require('express');
 let path = require('path');
-let cookieParser = require('cookie-parser');
-let expressSession = require('express-session');
+let cookieSession = require('cookie-session')
 let passport = require('passport');
 let logger = require('morgan');
 
@@ -19,8 +18,7 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(expressSession({ secret: process.env.SESSION_SECRET, resave: true, saveUninitialized: true }));
+app.use(cookieSession({ secret: process.env.SESSION_SECRET }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(passport.initialize());
