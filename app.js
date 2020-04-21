@@ -5,9 +5,9 @@ let cookieSession = require('cookie-session')
 let passport = require('passport');
 let logger = require('morgan');
 
-let indexRouter = require('./routes/index');
-let authRouter = require('./routes/auth');
-let usersRouter = require('./routes/users');
+let indexRouter = require('./routes/index.router');
+let authRouter = require('./routes/auth.router');
+let usersRouter = require('./routes/users.router');
 
 let app = express();
 

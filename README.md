@@ -15,7 +15,12 @@ Tutorist - платформа для комплексного ведения з�
     # GOOGLE AUTH
     GOOGLE_CLIENT_ID=<GOOGLE_CLIENT_ID>
     GOOGLE_CLIENT_SECRET=<GOOGLE_CLIENT_SECRET>
-    GOOGLE_REDIRECT_URL=http://localhost:3000
+    GOOGLE_REDIRECT_URL=http://localhost:3000/auth/google/callback
+    
+    # VKONTAKTE AUTH
+    VKONTAKTE_APP_ID=<VKONTAKTE_APP_ID>
+    VKONTAKTE_APP_SECRET=<VKONTAKTE_APP_SECRET>
+    VKONTAKTE_CALLBACK_URL=http://localhost:3000/auth/vkontakte/callback
     
     # POSTGRES DEVELOPMENT
     DB_USERNAME_DEV=<DB_USERNAME_DEV>

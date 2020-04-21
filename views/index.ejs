@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css'/>
-</head>
-<body>
-<p><a href="/auth/google">Войти через Google</a></p>
-<% if (user) { %>
-    <p><a href="/logout">Выйти из аккаунта</a></p>
-    <%- include('obj-list', { name: 'Пользователь', obj: user }); %>
-    <p><%= `${user.name.familyName} ${user.name.givenName}` %></p>
-    <p><a href="<%= `mailto:${user.emails[0].value}` %>"><%= user.emails[0].value %></a></p>
-    <img src="<%= user.photos[0].value %>"/>
-<% } %>
-</body>
+    <head>
+        <title><%= title %></title>
+        <link rel='stylesheet' href='/stylesheets/style.css'/>
+    </head>
+    <body>
+    <p><a href="/auth/google">Войти через Google</a></p>
+    <p><a href="/auth/vkontakte">Войти через VK</a></p>
+    <% if (user) { %>
+        <p><a href="/logout">Выйти из аккаунта</a></p>
+        <%- include('obj-list', { name: 'Пользователь', obj: user }); %>
+        <p><%= `${user.firstName} ${user.lastName}` %></p>
+        <p><a href="<%= `mailto:${user.email}` %>"><%= user.email %></a></p>
+        <img src="<%= user.photoUrl %>"/>
+    <% } %>
+    </body>
 </html>
