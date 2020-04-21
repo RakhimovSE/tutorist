@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <h1>Current date: <%= new Date() %></h1>
-  </body>
+    <head>
+        <title><%= title %></title>
+        <link rel='stylesheet' href='/stylesheets/style.css'/>
+    </head>
+    <body>
+    <p><a href="/auth/google">Войти через Google</a></p>
+    <p><a href="/auth/vkontakte">Войти через VK</a></p>
+    <% if (user) { %>
+        <p><a href="/logout">Выйти из аккаунта</a></p>
+        <%- include('obj-list', { name: 'Пользователь', obj: user }); %>
+        <p><%= `${user.firstName} ${user.lastName}` %></p>
+        <p><a href="<%= `mailto:${user.email}` %>"><%= user.email %></a></p>
+        <img src="<%= user.photoUrl %>"/>
+    <% } %>
+    </body>
 </html>
