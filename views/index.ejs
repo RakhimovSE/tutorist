@@ -7,6 +7,7 @@
     <body>
     <p><a href="/auth/google">Войти через Google</a></p>
     <p><a href="/auth/vkontakte">Войти через VK</a></p>
+    <p><a href="/auth/yandex">Войти через Яндекс</a></p>
     <% if (user) { %>
         <p><a href="/logout">Выйти из аккаунта</a></p>
         <%- include('obj-list', { name: 'Пользователь', obj: user }); %>
