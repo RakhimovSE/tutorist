@@ -1,21 +1,17 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <p><a href="<%= googleUrl %>">Login with Google</a></p>
-    <% if (account) { %>
-      <p><%= `${account.firstName} ${account.lastName}` %></p>
-      <p><a href="<%= `mailto:${account.email}` %>"><%= account.email %></a></p>
-      <img src="<%= account.profileUrl %>"/>
-      <%- include('obj-list', { name: 'Аккаунт', obj: account }); %>
-    <% } %>
-    <% if (Object.keys(params).length) { %>
-      <%- include('obj-list', { name: 'GET-параметры', obj: params }); %>
-    <% } %>
-  </body>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+</head>
+<body>
+<p><a href="/auth/google">Войти через Google</a></p>
+<% if (user) { %>
+    <p><a href="/logout">Выйти из аккаунта</a></p>
+    <%- include('obj-list', { name: 'Пользователь', obj: user }); %>
+    <p><%= `${user.name.familyName} ${user.name.givenName}` %></p>
+    <p><a href="<%= `mailto:${user.emails[0].value}` %>"><%= user.emails[0].value %></a></p>
+    <img src="<%= user.photos[0].value %>"/>
+<% } %>
+</body>
 </html>

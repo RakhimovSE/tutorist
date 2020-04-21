@@ -1,29 +1,19 @@
 let express = require('express');
 let router = express.Router();
 
-const { urlGoogle, getGoogleAccountFromCode } = require('../src/google-auth');
-const userController = require('../db/controllers/user.controller');
-
 /* GET home page. */
-router.get('/', async function (req, res, next) {
-  let params = req.query;
-  let account = null;
-  let googleUrl = urlGoogle();
-
-  if (params.code) {
-    account = await getGoogleAccountFromCode(params.code)
-      .catch(console.error);
-    userController.create(account);
-  }
-
+router.get('/', async (req, res, next) => {
   const data = {
     title: 'Express',
-    googleUrl,
-    params,
-    account,
+    user: req.user,
   };
 
   res.render('index', data);
+});
+
+router.get('/logout', (req, res) => {
+  req.logout();
+  res.redirect('/');
 });
 
 module.exports = router;

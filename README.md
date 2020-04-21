@@ -10,6 +10,7 @@ Tutorist - платформа для комплексного ведения з�
     # GLOBAL
     NODE_ENV=development
     PORT=3000
+    SESSION_SECRET=<SESSION_SECRET>
 
     # GOOGLE AUTH
     GOOGLE_CLIENT_ID=<GOOGLE_CLIENT_ID>
@@ -19,20 +20,20 @@ Tutorist - платформа для комплексного ведения з�
     # POSTGRES DEVELOPMENT
     DB_USERNAME_DEV=<DB_USERNAME_DEV>
     DB_PASSWORD_DEV=<DB_PASSWORD_DEV>
-    DB_DATABASE_DEV=<DB_DATABASE_DEV>
-    DB_HOST_DEV=<DB_HOST_DEV>
+    DB_DATABASE_DEV=tutorist_dev
+    DB_HOST_DEV=localhost
     
     # POSTGRES TEST
     DB_USERNAME_TEST=<DB_USERNAME_TEST>
     DB_PASSWORD_TEST=<DB_PASSWORD_TEST>
-    DB_DATABASE_TEST=<DB_DATABASE_TEST>
-    DB_HOST_TEST=<DB_HOST_TEST>
+    DB_DATABASE_TEST=tutorist_test
+    DB_HOST_TEST=localhost
     
     # POSTGRES PRODUCTION
     DB_USERNAME_PROD=<DB_USERNAME_PROD>
     DB_PASSWORD_PROD=<DB_PASSWORD_PROD>
-    DB_DATABASE_PROD=<DB_DATABASE_PROD>
-    DB_HOST_PROD=<DB_HOST_PROD>
+    DB_DATABASE_PROD=tutorist_prod
+    DB_HOST_PROD=localhost
     ```
     Данные по этому файлу можно получить у @RakhimovSE
 ## Запуск сервера
