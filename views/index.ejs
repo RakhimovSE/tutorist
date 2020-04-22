@@ -1,19 +1,19 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title><%= title %></title>
-        <link rel='stylesheet' href='/css/bootstrap.css'/>
-    </head>
-    <body>
-    <p><a href="/auth/google">Войти через Google</a></p>
-    <p><a href="/auth/vkontakte">Войти через VK</a></p>
-    <p><a href="/auth/yandex">Войти через Яндекс</a></p>
-    <% if (user) { %>
-        <p><a href="/logout">Выйти из аккаунта</a></p>
-        <%- include('obj-list', { name: 'Пользователь', obj: user }); %>
-        <p><%= `${user.firstName} ${user.lastName}` %></p>
-        <p><a href="<%= `mailto:${user.email}` %>"><%= user.email %></a></p>
-        <img src="<%= user.photoUrl %>"/>
-    <% } %>
-    </body>
+<!doctype html>
+<html lang="ru">
+<head>
+    <%- include('meta') %>
+    <title>Tutorist</title>
+</head>
+<body>
+<% if (!user) { %>
+    <p><a href="/login">Войти</a></p>
+<% } %>
+<% if (user) { %>
+    <p><a href="/logout">Выйти из аккаунта</a></p>
+    <%- include('helpers/obj-list', { name: 'Пользователь', obj: user }) %>
+    <p><%= `${user.firstName} ${user.lastName}` %></p>
+    <p><a href="<%= `mailto:${user.email}` %>"><%= user.email %></a></p>
+    <img class="navbar__avatar navbar__avatar_circle" src="<%= user.photoUrl %>"/>
+<% } %>
+</body>
 </html>

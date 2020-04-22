@@ -53,3 +53,7 @@ Tutorist - платформа для комплексного ведения з�
 * Запустить сервер: `node bin/www`
 
 Теперь вы можете перейти на [`localhost:3000`](http://localhost:3000) в браузере
+## Troubleshooting
+* Если при запуске проекта возникает ошибка `Error: Missing binding /Users/rakhimovse/Projects/tutorist/node_modules/node-sass/vendor/darwin-x64-72/binding.node`:
+    * Найти путь до `node` в `Preferences | Languages & Frameworks | Node.js and NPM` (например, `/usr/local/bin/node`)
+    * Выполнить: `/usr/local/bin/node ./node_modules/node-sass/scripts/install.js` (вместо `/usr/local/bin/node` подставить свой путь)

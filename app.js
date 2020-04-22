@@ -1,5 +1,6 @@
 let createError = require('http-errors');
 let express = require('express');
+let sassMiddleware = require('node-sass-middleware');
 let path = require('path');
 let cookieSession = require('cookie-session')
 let passport = require('passport');
@@ -19,6 +20,11 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieSession({ secret: process.env.SESSION_SECRET }));
+app.use(sassMiddleware({
+  src: path.join(__dirname, 'src'),
+  dest: path.join(__dirname, 'public'),
+  outputStyle: 'compressed'
+}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(passport.initialize());

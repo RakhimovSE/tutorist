@@ -1,14 +1,17 @@
-let express = require('express');
-let router = express.Router();
+const express = require('express');
+const router = express.Router();
+const helpers = require('./helpers');
 
-/* GET home page. */
 router.get('/', async (req, res, next) => {
   const data = {
-    title: 'Express',
     user: req.user,
   };
 
   res.render('index', data);
+});
+
+router.get('/login', helpers.ensureNotAuthenticated, async (req, res, next) => {
+  res.render('login');
 });
 
 router.get('/logout', (req, res) => {
