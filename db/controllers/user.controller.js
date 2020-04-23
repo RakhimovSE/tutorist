@@ -5,6 +5,7 @@ const getSerializedProfile = {
     {
       firstName: profile.name.givenName,
       lastName: profile.name.familyName,
+      middleName: null,
       email: profile.emails[0].value,
       photoUrl: profile.photos[0].value,
       profileId: profile.id,
@@ -15,6 +16,7 @@ const getSerializedProfile = {
     {
       firstName: profile.name.givenName,
       lastName: profile.name.familyName,
+      middleName: null,
       email: profile.email,
       photoUrl: profile.photos[1].value,
       profileId: profile.id.toString(),
@@ -25,6 +27,7 @@ const getSerializedProfile = {
     {
       firstName: profile.name.familyName,
       lastName: profile.name.givenName,
+      middleName: null,
       email: profile.emails[0].value,
       photoUrl: `https://avatars.mds.yandex.net/get-yapic/${profile._json.default_avatar_id}/islands-200`,
       profileId: profile.id,
