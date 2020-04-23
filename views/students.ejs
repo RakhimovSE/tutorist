@@ -5,11 +5,11 @@
         <link rel='stylesheet' href='/stylesheets/style.css'/>
     </head>
     <body>
-    <form action="/action_page.php">
+    <form action="/students/add">
       <label for="firstName">Имя:</label>
-      <input type="text" id="firstName" name="firstName"><br><br>
+      <input type="text" id="firstName" name="firstName" required><br><br>
       <label for="lastName">Фамилия:</label>
-      <input type="text" id="lastName" name="lastName"><br><br>
+      <input type="text" id="lastName" name="lastName" required><br><br>
       <label for="middleName">Отчество:</label>
       <input type="text" id="middleName" name="middleName"><br><br>
       <label for="photoUrl">Фотография:</label>
@@ -27,7 +27,7 @@
       <input type="text" id="email" name="email"><br><br>
       <label for="skype">Skype:</label>
       <input type="text" id="skype" name="skype"><br><br>
-      <input type="submit" value="Submit">
+      <input type="submit" value="Сохранить">
     </form>
     </body>
 </html>
