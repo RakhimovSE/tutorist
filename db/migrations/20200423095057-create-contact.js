@@ -24,7 +24,6 @@ module.exports = {
         references: {
           model: {
             tableName: 'ContactType',
-            schema: 'schema'
           },
           key: 'id'
         },
