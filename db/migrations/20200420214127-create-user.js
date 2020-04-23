@@ -13,11 +13,12 @@ module.exports = {
         type: Sequelize.STRING
       },
       lastName: {
-        allowNull: false,
         type: Sequelize.STRING
       },
+      middleName: {
+        type: Sequelize.STRING,
+      },
       email: {
-        allowNull: false,
         type: Sequelize.STRING
       },
       photoUrl: {
