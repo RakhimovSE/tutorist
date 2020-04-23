@@ -1,0 +1,6 @@
+.btn {
+  &_highlight_none:focus {
+    outline: none;
+    box-shadow: none;
+  }
+}
