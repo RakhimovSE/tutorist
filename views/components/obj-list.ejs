@@ -1,0 +1,14 @@
+<h2><%= name %></h2>
+<% function renderList(obj) { %>
+    <ul>
+        <% for (let [key, value] of Object.entries(obj)) { %>
+        <li><%= key %>:
+            <% if (value instanceof Object) { %>
+                <% renderList(value) %>
+            <% } else { %>
+                <%= value %>
+            <% } %>
+        <% } %>
+    </ul>
+<% } %>
+<% renderList(obj) %>

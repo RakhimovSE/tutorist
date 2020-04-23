@@ -2,3 +2,4 @@
 /node_modules/
 /tutorist.iml
 /.env
+/public/stylesheets/style.css
