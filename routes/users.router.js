@@ -8,7 +8,6 @@ router.get('/', (req, res, next) => {
 
 router.get('/students', (req, res) => {
   const data = {
-    title: 'students',
     user: req.user,
   };
   res.render('students', data);

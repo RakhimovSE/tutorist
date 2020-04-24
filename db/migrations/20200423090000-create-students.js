@@ -1,4 +1,5 @@
 'use strict';
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Students', {
@@ -8,13 +9,20 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      archived: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
+      },
+      deleted: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
+      },
       firstName: {
         type: Sequelize.STRING,
         allowNull: false
       },
       lastName: {
         type: Sequelize.STRING,
-        allowNull: false
       },
       middleName: {
         type: Sequelize.STRING
@@ -26,9 +34,15 @@ module.exports = {
         type: Sequelize.STRING,
         defaultValue: "student"
       },
-      relatedStudent: {
-        type: Sequelize.STRING
-      },
+      /*relatedStudent: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: 'Students'
+          },
+          key: 'id'
+        }
+      },*/
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
