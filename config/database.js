@@ -1,4 +1,4 @@
-require('dotenv').config(); // зачем??
+require('dotenv').config();
 
 module.exports = {
   "development": {
