@@ -24,5 +24,8 @@ module.exports = {
     "host": process.env.DB_HOST_PROD,
     "dialect": "postgres",
     "seederStorage": "sequelize",
+  },
+  define(students, param2) {
+    return undefined;
   }
 };
