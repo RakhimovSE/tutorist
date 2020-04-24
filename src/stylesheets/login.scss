@@ -10,6 +10,21 @@
   padding-top: 20px;
   padding-bottom: 10px;
 }
+.padding_top{
+  padding-top: 30px;
+}
+.padding_top_button{
+  padding-top: 20px;
+}
+.padding_bottom{
+  padding-bottom: 20px;
+}
+.padding_bottom_buttons{
+  padding-bottom: 20px;
+}
+.padding_bottom_final{
+  padding-bottom: 30px;
+}
 
 
 .border_width{
@@ -50,8 +65,8 @@ a:hover {
   -moz-transition: all 0.5s ease-in-out;
   -o-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out;}
-.kpx_login .kpx_socialButtons .kpx_btn-google-plus:hover {background: #ffffff; color:#EA4335; }
-.kpx_login .kpx_socialButtons .kpx_btn-google-plus:focus {background: #fff; color: #EA4335; border-color: #EA4335}
+.kpx_login .kpx_socialButtons .kpx_btn-google-plus:hover {background: #ab1e11; color:#ffffff; }
+.kpx_login .kpx_socialButtons .kpx_btn-google-plus:focus {background: #ab1e11; color: #ffffff; border-color: #EA4335}
 
 
 
@@ -62,15 +77,15 @@ a:hover {
   -o-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out;
 }
-.kpx_login .kpx_socialButtons .kpx_btn-yandex:hover {background: #ffffff; color:#ffcc00 }
+.kpx_login .kpx_socialButtons .kpx_btn-yandex:hover {background: #ffb300; color: #ffffff}
 .kpx_login .kpx_socialButtons .kpx_btn-yandex:focus {background: #fff; color: #ffcc00; border-color: #ffcc00}
 
 .kpx_login .kpx_socialButtons .kpx_btn-vk {background: #45668e; -webkit-transition: all 0.5s ease-in-out;
   -moz-transition: all 0.5s ease-in-out;
   -o-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out;}
-.kpx_login .kpx_socialButtons .kpx_btn-vk:hover {background: #fff; color: #45668e}
-.kpx_login .kpx_socialButtons .kpx_btn-vk:focus {background: #fff; color: #45668e; border-color: #45668e}
+.kpx_login .kpx_socialButtons .kpx_btn-vk:hover {background: #24354a; color: #ffffff}
+.kpx_login .kpx_socialButtons .kpx_btn-vk:focus {background: #24354a; color: #ffffff; border-color: #24354a}
 
 
 
