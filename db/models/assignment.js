@@ -5,6 +5,8 @@ module.exports = (sequelize, DataTypes) => {
         title : DataTypes.STRING,
         instructions: DataTypes.TEXT,
         type : DataTypes.STRING,
+        archived : DataTypes.Boolean,
+        deleted : DataTypes.Boolean,
         data : DataTypes.STRING
     }, {});
     Assignment.associate = (models) => {

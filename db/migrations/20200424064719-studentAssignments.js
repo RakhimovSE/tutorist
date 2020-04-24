@@ -29,6 +29,14 @@ module.exports = {
                 allowNull: false,
                 type: Sequelize.DATE
             },
+            archived: {
+                allowNull: false,
+                type: Sequelize.BOOLEAN
+            },
+            deleted: {
+                allowNull: false,
+                type: Sequelize.BOOLEAN
+            },
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE

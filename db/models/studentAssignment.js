@@ -6,6 +6,8 @@ module.exports = (sequelize, DataTypes) => {
         assignment : DataTypes.INTEGER,
         dueDate: DataTypes.DATE,
         points : DataTypes.INTEGER,
+        archived : DataTypes.Boolean,
+        deleted : DataTypes.Boolean,
         note : DataTypes.TEXT
     }, {});
     StudentAssignment.associate = (models) => {

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment-form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+<div class="container p-md-2" id="app">
+    <h1>База заданий</h1>
+<form>
+    <div class="form-group">
+        <label for="title">Заголовок</label>
+        <input type="text" class="form-control" id="title" aria-describedby="title-Help" placeholder="Заголовок задания">
+    </div>
+    <div class="form-group">
+        <label for="type">Тип</label>
+        <input type="text" class="form-control" id="type" placeholder="Тип задания">
+    </div>
+    <div class="form-group">
+        <label for="instruction">Инструкции</label>
+        <input type="text" class="form-control" id="instruction" placeholder="Инструкции к заданию">
+    </div>
+    <button type="submit" class="btn btn-primary">Отправить</button>
+</form>
+</div>
+<script type='module' src="../public/api/assignments.js"></script>
+</body>
+</html>
