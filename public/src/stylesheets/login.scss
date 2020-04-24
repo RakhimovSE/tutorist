@@ -1,0 +1,89 @@
+// Исходники:
+// https://bootsnipp.com/snippets/o85lM
+// https://bootsnipp.com/snippets/yN75G
+
+#login-page {
+  height: 100vh;
+}
+
+@media (min-width: 768px) {
+  .kpx_row-sm-offset-3 div:first-child[class*="col-"] {
+    margin-left: 13%;
+  }
+}
+
+.padding_top {
+  padding-top: 30px;
+}
+
+.padding_top_button {
+  padding-top: 20px;
+}
+
+.padding_bottom {
+  padding-bottom: 20px;
+}
+
+.padding_bottom_buttons {
+  padding-bottom: 20px;
+}
+
+.padding_bottom_final {
+  padding-bottom: 30px;
+}
+
+.border_width {
+  border-width: 26px;
+}
+
+.kpx_login {
+  .kpx_authTitle {
+    text-align: center;
+    line-height: 300%;
+    padding-bottom: 10px;
+  }
+
+  .kpx_socialButtons {
+    a {
+      color: white;
+      // in youruse @body-bg opacity: 0.9;
+      width: 300px;
+
+      &:hover {
+        color: white;
+        opacity: 1;
+      }
+
+      &.kpx_btn-google-plus {
+        background: #EA4335;
+
+        &:hover {
+          background: #ab1e11;
+        }
+      }
+
+      &.kpx_btn-yandex {
+        background: #ffcc00;
+
+        &:hover {
+          background: #e29f00;
+        }
+      }
+
+      &.kpx_btn-vk {
+        background: #45668e;
+
+        &:hover {
+          background: #24354a;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .kpx_login .kpx_forgotPwd {
+    text-align: right;
+    margin-top: 10px;
+  }
+}

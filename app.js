@@ -21,9 +21,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieSession({ secret: process.env.SESSION_SECRET }));
 app.use(sassMiddleware({
-  src: path.join(__dirname, 'src'),
+  src: path.join(__dirname, 'public', 'src'),
   dest: path.join(__dirname, 'public'),
-  outputStyle: 'compressed'
+  outputStyle: 'extended',
+  sourceMap: true
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
