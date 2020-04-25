@@ -8,14 +8,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      archived: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false
-      },
-      deleted: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false
-      },
       contactTypeId: {
         type: Sequelize.INTEGER,
         references: {
@@ -41,6 +33,14 @@ module.exports = {
           },
           key: 'id'
         }
+      },
+      archived: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
+      },
+      deleted: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
       },
       createdAt: {
         allowNull: false,

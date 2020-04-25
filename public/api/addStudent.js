@@ -16,7 +16,7 @@ new Vue({
     methods: {
         async addStudent() {
             const {...formData} = this.form;
-            const newStudent = await request('/api/addstudent', 'POST', formData)
+            const newStudent = await request('/api/addstudent', 'POST', formData);
             this.form = {};
         }
     }
@@ -37,9 +37,8 @@ async function request(url, method = 'GET', data = null) {
             headers,
             body
         })
-        console.log(response)
         return await response.json()
     } catch (e) {
-        console.warn('Error:', e.message)
+        console.warn('Error:', e.message);
     }
 }

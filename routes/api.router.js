@@ -15,11 +15,9 @@ router.get('/addstudent', (req, res) => {
 });*/
 
 router.post('/addstudent', (req, res) => {
-    let formData = req.body
-    if (!formData.lastName)
-        console.log('yes');
+    let formData = {...req.body, tutorId: req.user.id}
     studentController.create(formData)
-    res.status(200).json(formData)
+        .then(() => res.status(200).json(formData))
 })
 
 module.exports = router;
