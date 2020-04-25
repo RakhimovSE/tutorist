@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "nodemon ./bin/www"
+    "dev": "nodemon ./bin/www",
+    "db:rebuild": "sequelize db:drop && sequelize db:create && sequelize db:migrate && sequelize db:seed:all"
   },
   "dependencies": {
     "cookie-session": "^1.4.0",
@@ -14,6 +15,8 @@
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
+    "node-sass": "^4.13.1",
+    "node-sass-middleware": "^0.11.0",
     "passport": "^0.4.1",
     "passport-google-oauth20": "^2.0.0",
     "passport-vkontakte": "^0.3.2",

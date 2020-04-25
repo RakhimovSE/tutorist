@@ -2,6 +2,7 @@ const { parsed: dotenv } = require('dotenv').config();
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
+const helpers = require('./helpers');
 
 const userController = require('../db/controllers/user.controller');
 
@@ -71,28 +72,31 @@ passport.deserializeUser((obj, cb) => {
 /** РОУТЕР **/
 /************/
 
-router.get('/google', passport.authenticate('google'));
+router.get('/google', helpers.ensureNotAuthenticated, passport.authenticate('google'));
 
 router.get(
   '/google/callback',
+  helpers.ensureNotAuthenticated,
   passport.authenticate('google', { failureRedirect: '/login' }),
   (req, res) => {
     res.redirect('/')
   });
 
-router.get('/vkontakte', passport.authenticate('vkontakte'));
+router.get('/vkontakte', helpers.ensureNotAuthenticated, passport.authenticate('vkontakte'));
 
 router.get(
   '/vkontakte/callback',
+  helpers.ensureNotAuthenticated,
   passport.authenticate('vkontakte', { failureRedirect: '/login' }),
   (req, res) => {
     res.redirect('/');
   });
 
-router.get('/yandex', passport.authenticate('yandex'));
+router.get('/yandex', helpers.ensureNotAuthenticated, passport.authenticate('yandex'));
 
 router.get(
   '/yandex/callback',
+  helpers.ensureNotAuthenticated,
   passport.authenticate('yandex', { failureRedirect: '/login' }),
   (req, res) => {
     res.redirect('/');

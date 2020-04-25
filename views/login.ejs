@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <%- include('components/meta') %>
+
+    <script>
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      })
+    </script>
+
+    <title>Вход в аккаунт</title>
+</head>
+<body id="login-page">
+<div class="blockWrapper fadeInUp">
+    <div id="formContent">
+        <!-- Icon -->
+        <!--        <div class="fadeIn first">-->
+        <!--            <img src="https://www.b-cube.in/wp-content/uploads/2014/05/aditya-300x177.jpg" id="icon" alt="User Icon"/>-->
+        <!--            <h1>Aditya News</h1>-->
+        <!--        </div>-->
+        <div class="kpx_login">
+            <div class="container">
+                <h3 class="padding_top padding_bottom">Вход</h3>
+                <div class="row kpx_row-sm-offset-3 kpx_socialButtons padding_bottom_buttons">
+                    <div class="col-xs-2 col-sm-2">
+                        <a href="/auth/yandex" class="btn btn-lg btn-block kpx_btn-yandex" data-toggle="tooltip" data-placement="top" title="Войти через Яндекс">
+                            <i class="fab fa-yandex fa-2x"></i>
+                            <span class="hidden-xs"></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="row kpx_row-sm-offset-3 kpx_socialButtons padding_bottom_buttons">
+                    <div class="col-xs-2 col-sm-2">
+                        <a href="/auth/google" class="btn btn-lg btn-block kpx_btn-google-plus" data-toggle="tooltip" data-placement="top" title="Войти через Google">
+                            <i class="fa fa-google fa-2x"></i>
+                            <span class="hidden-xs"></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="row kpx_row-sm-offset-3 kpx_socialButtons padding_bottom_final">
+                    <div class="col-xs-2 col-sm-2">
+                        <a href="/auth/vkontakte" class="btn btn-lg btn-block kpx_btn-vk" data-toggle="tooltip" data-placement="top" title="Войти через ВКонтакте">
+                            <i class="fa fa-vk fa-2x"></i>
+                            <span class="hidden-xs"></span>
+                        </a>
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- На главную -->
+            <div id="formFooter">
+                <a class="underlineHover" href="/">На главную</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

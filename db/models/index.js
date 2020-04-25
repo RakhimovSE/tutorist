@@ -42,6 +42,4 @@ db.Sequelize = Sequelize;
 /** MODELS **/
 /*******************/
 
-db.User = require('./user')(sequelize, Sequelize);
-
 module.exports = db;

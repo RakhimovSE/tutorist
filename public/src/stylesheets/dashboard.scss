@@ -1,0 +1,11 @@
+.navbar {
+  &__avatar {
+    &_size {
+      width: 40px;
+      height: 40px;
+    }
+    &_padding {
+      padding: 2px;
+    }
+  }
+}
