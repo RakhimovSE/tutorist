@@ -3,36 +3,54 @@
     <head>
         <title>students</title>
         <link rel='stylesheet' href='/stylesheets/style.css'/>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     </head>
     <body>
-    <div class="container pt-3" id="student">
-    <form @submit.prevent="addStudent">
+    <section id="add" class="container">
+      <div class="form-wrap" id="student">
+            <form @submit.prevent="addStudent">
+            <div class="input-group">
+              <label for="firstName">Имя*:</label>
+              <input type="text" class="input-box" id="firstName" name="firstName" placeholder ="Например, Василий" v-model="form.firstName" required>
+            </div>
+            <div class="input-group">
+              <label for="lastName">Фамилия:</label>
+              <input type="text" class="input-box" id="lastName" name="lastName" placeholder = "Например, Пупкин" v-model="form.lastName">
+            </div>
+            <div class="input-group">
+              <label for="middleName">Отчество:</label>
+              <input type="text" class="input-box" id="middleName" name="middleName" placeholder = "Например, Акакиевич" v-model="form.middleName">
+              </div>
+            <div class="input-group">
+              <label for="photoUrl">Фотография:</label>
+              <input type="file" class="input-box" id="photoUrl" name="photoUrl">
+              </div>
+            <div class="input-group">
+              <label for="role">Роль:</label>
+              <select class="input-box" name="role" id="role" v-model = "form.role">
+                      <option value="student" selected>Ученик</option>
+                      <option value="parent">Родитель</option>
+              </select>
+              </div>
 
-      <label for="firstName">Имя*:</label>
-      <input type="text" class="form-control" id="firstName" name="firstName" v-model="form.firstName" required>
-      <label for="lastName">Фамилия:</label>
-      <input type="text" class="form-control" id="lastName" name="lastName" v-model="form.lastName">
-      <label for="middleName">Отчество:</label>
-      <input type="text" class="form-control" id="middleName" name="middleName" v-model="form.middleName">
-      <label for="photoUrl">Фотография:</label>
-      <input type="file" class="form-control" id="photoUrl" name="photoUrl">
-      <label for="role">Роль:</label>
-      <select class="form-control" name="role" id="role" v-model = "form.role">
-              <option value="student" selected>Ученик</option>
-              <option value="parent">Родитель</option>
-      </select>
-
-      <p>Контакты</p>
-      <label for="phone">Телефон:</label>
-      <input type="text" class="form-control" id="phone" name="phone">
-      <label for="email">Email:</label>
-      <input type="text" class="form-control" id="email" name="email">
-      <label for="skype">Skype:</label>
-      <input type="text" class="form-control" id="skype" name="skype">
-      <button class="btn btn-primary" type="submit">Сохранить</button>
-       </div>
-    </form>
+              <p>Контакты</p>
+              <div class="input-group">
+              <label for="phone">Телефон:</label>
+              <input type="text" class="input-box" id="phone" name="phone">
+              </div>
+              <div class="input-group">
+              <label for="email">Email:</label>
+              <input type="text" class="input-box" id="email" name="email">
+              </div>
+              <div class="input-group">
+              <label for="skype">Skype:</label>
+              <input type="text" class="input-box" id="skype" name="skype">
+              </div>
+              <input type="submit" value="Сохранить" class="btn btn-reverse">
+            </form>
+            </div>
+    </section>
     <script type="module" src="../api/addStudent.js"></script>
+
     </body>
+
 </html>

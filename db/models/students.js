@@ -1,6 +1,7 @@
 'use strict';
+
 module.exports = (sequelize, DataTypes) => {
-  const Students = sequelize.define('Students', {
+    const Students = sequelize.define('Students', {
     archived: DataTypes.BOOLEAN,
     deleted: DataTypes.BOOLEAN,
     firstName: DataTypes.STRING,

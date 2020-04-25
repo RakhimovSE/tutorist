@@ -32,7 +32,7 @@ async function request(url, method = 'GET', data = null) {
             body = JSON.stringify(data)
         }
 
-        const response = await fetch(url, {
+       const response = await fetch(url, {
             method,
             headers,
             body

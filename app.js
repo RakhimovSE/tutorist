@@ -5,15 +5,12 @@ let cookieSession = require('cookie-session')
 let passport = require('passport');
 let logger = require('morgan');
 
-
 let indexRouter = require('./routes/index.router');
 let authRouter = require('./routes/auth.router');
 let usersRouter = require('./routes/users.router');
 let apiRouter = require('./routes/api.router')
 
 let app = express();
-const CONTACTS = [{id: 1, name: 'asd'}]
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
