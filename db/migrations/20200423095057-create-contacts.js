@@ -8,6 +8,15 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      studentId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: 'Students'
+          },
+          key: 'id'
+        }
+      },
       contactTypeId: {
         type: Sequelize.INTEGER,
         references: {
@@ -24,15 +33,6 @@ module.exports = {
       },
       description: {
         type: Sequelize.STRING
-      },
-      studentId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: {
-            tableName: 'Students'
-          },
-          key: 'id'
-        }
       },
       archived: {
         type: Sequelize.BOOLEAN,

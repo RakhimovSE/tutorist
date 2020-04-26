@@ -1,3 +1,3 @@
-const { Students } = require('../models/index');
+const { Student } = require('../models/index');
 
-exports.create = (body) => Students.create(body);
+exports.create = (body) => Student.create(body);

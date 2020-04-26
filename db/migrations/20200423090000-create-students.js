@@ -1,5 +1,4 @@
 'use strict';
-
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Students', {
@@ -28,16 +27,13 @@ module.exports = {
       },
       tutorId: {
         type: Sequelize.INTEGER,
-      },
-      /*relatedStudent: {
-        type: Sequelize.INTEGER,
         references: {
           model: {
-            tableName: 'Students'
+            tableName: 'Users'
           },
           key: 'id'
         }
-      },*/
+      },
       archived: {
         type: Sequelize.BOOLEAN,
         defaultValue: false

@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     profileProvider: DataTypes.STRING
   }, {});
   User.associate = (models) => {
-    // associations can be defined here
+    User.hasMany(models.Student, { foreignKey: 'tutorId' });
   };
   return User;
 };
