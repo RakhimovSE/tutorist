@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>students</title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+</head>
+<body>
+<section id="add" class="container">
+    <div class="form-wrap" id="student">
+        <h1>Список студентов</h1>
+        <div v-if="loading">
+            <loader />
+        </div>
+        <div v-else-if="students.length">
+            <div class="card mb-3" v-for="student in students">
+                <div class="card-body">
+                    <h4><center>{{student.firstName}} {{student.lastName}} {{student.middleName}} : {{student.role}}</center></h4>
+                    <h4>Контакты: </h4>
+                    <!-- Высокая сложность, каждый раз листаем контакты чтобы понять где наш id студента, надо придумать иначе
+                         Хотя если предположить, что у каждого юзера по ~100 студентов, то не так страшно O(contact N * student N)-->
+                    <div v-if="contactsArray.length">
+                        <div v-for="contact in contactsArray">
+                            <div v-if="contact.studentId == student.id"><h5>{{contactTypes[contact.contactTypeId - 1].name}} : {{contact.value}}</h5></div>
+                        </div>
+                    </div>
+                    <div v-else>Нет контактов</div>
+                </div>
+            </div>
+        </div>
+        <p v-else>Студентов пока нет</p>
+
+        <h1>Создать студента</h1>
+        <form @submit.prevent="addStudent">
+            <div class="input-group">
+                <label for="firstName">Имя*:</label>
+                <input type="text" class="input-box" id="firstName" placeholder ="Например, Василий" v-model="form.firstName" required>
+            </div>
+            <div class="input-group">
+                <label for="lastName">Фамилия:</label>
+                <input type="text" class="input-box" id="lastName" placeholder = "Например, Пупкин" v-model="form.lastName">
+            </div>
+            <div class="input-group">
+                <label for="middleName">Отчество:</label>
+                <input type="text" class="input-box" id="middleName" placeholder = "Например, Акакиевич" v-model="form.middleName">
+            </div>
+            <div class="input-group">
+                <label for="photoUrl">Фотография:</label>
+                <input type="file" class="input-box" id="photoUrl">
+            </div>
+            <div class="input-group">
+                <label for="role">Роль*:</label>
+                <select class="input-box" name="role" id="role" v-model = "form.role" required>
+                    <option value="student" selected>Ученик</option>
+                    <option value="parent">Родитель</option>
+                </select>
+            </div>
+            <input type="submit" value="Сохранить" class="btn btn-reverse">
+        </form>
+
+            <h1>Cоздать Контакт</h1>
+        <form @submit.prevent="addContact">
+            <div class="input-group">
+                <label for="type">Выберите ученика*:</label>
+                <select class="input-box" id="contactStudent" v-model="contacts.studentId" required>
+                    <option v-for="student in students" type="hidden" :value="student.id">
+                        {{ student.firstName }} {{student.lastName}}
+                    </option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="type">Выберите тип контакта*:</label>
+                <select class="input-box" id=contactType v-model="contacts.contactTypeId" required>
+                    <option v-for="contactType in contactTypes" type="hidden" :value="contactType.id">
+                        {{ contactType.name }}
+                    </option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="value">Значение*:</label>
+                <input type="text" class="input-box" id="value" v-model="contacts.value" required>
+            </div>
+            <div class="input-group">
+                <label for="description">Описание:</label>
+                <textarea rows="5" type="text" class="input-box" id="description" v-model="contacts.description"></textarea>
+            </div>
+            <input type="submit" value="Сохранить" class="btn btn-reverse">
+        </form>
+
+    </div>
+</section>
+<script type="module" src="../../api/students.api.js"></script>
+
+</body>
+
+</html>

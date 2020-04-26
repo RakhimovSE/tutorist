@@ -27,4 +27,11 @@ router.get('/logout', (req, res) => {
   res.redirect('/');
 });
 
+router.get('/students', (req, res) => {
+  const data = {
+    user: req.user
+  }
+  res.render('students', data)
+})
+
 module.exports = router;
