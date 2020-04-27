@@ -3,10 +3,10 @@
 module.exports = (sequelize, DataTypes) => {
     const Assignment = sequelize.define('Assignment', {
         title : DataTypes.STRING,
-        instructions: DataTypes.TEXT,
         type : DataTypes.STRING,
-        archived : DataTypes.Boolean,
-        deleted : DataTypes.Boolean,
+        instructions: DataTypes.TEXT,
+        archived : DataTypes.BOOLEAN,
+        deleted : DataTypes.BOOLEAN,
         data : DataTypes.STRING
     }, {});
     Assignment.associate = (models) => {

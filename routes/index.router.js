@@ -27,4 +27,11 @@ router.get('/logout', (req, res) => {
   res.redirect('/');
 });
 
+router.get('/assignments', (req, res) => {
+  const data = {
+    user: req.user
+  }
+  res.render('assignment_form.ejs', data)
+})
+
 module.exports = router;

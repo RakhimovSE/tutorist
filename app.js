@@ -9,6 +9,7 @@ let logger = require('morgan');
 let indexRouter = require('./routes/index.router');
 let authRouter = require('./routes/auth.router');
 let usersRouter = require('./routes/users.router');
+let assignmentRouter = require('./routes/assignments.router');
 
 let app = express();
 
@@ -18,12 +19,12 @@ app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieSession({ secret: process.env.SESSION_SECRET }));
+app.use(express.urlencoded({extended: false}));
+app.use(cookieSession({secret: process.env.SESSION_SECRET}));
 app.use(sassMiddleware({
-  src: path.join(__dirname, 'src'),
-  dest: path.join(__dirname, 'public'),
-  outputStyle: 'compressed'
+    src: path.join(__dirname, 'src'),
+    dest: path.join(__dirname, 'public'),
+    outputStyle: 'compressed'
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -31,23 +32,26 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/', indexRouter);
-app.use('/auth', authRouter);
+app.use('/auth', authRouter)
 app.use('/users', usersRouter);
+app.use('/assignments', assignmentRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  next(createError(404));
+    next(createError(404));
 });
 
 // error handler
 app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error');
 });
+
+
 
 module.exports = app;

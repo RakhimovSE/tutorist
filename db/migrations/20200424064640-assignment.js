@@ -9,13 +9,13 @@ module.exports = {
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
-            title: {
-                allowNull: false,
-                type: Sequelize.STRING
-            },
             instructions: {
                 allowNull: false,
                 type: Sequelize.TEXT
+            },
+            title: {
+                allowNull: false,
+                type: Sequelize.STRING
             },
             type: {
                 allowNull: false,
