@@ -1,3 +1,7 @@
+<%
+let title = 'Главная';
+let page = 'dashboard';
+%>
 <!--
 =========================================================
 Material Dashboard - v2.1.2
@@ -13,14 +17,14 @@ The above copyright notice and this permission notice shall be included in all c
 <html lang="ru">
 
 <head>
-  <%- include('components/meta', { title: 'Главная' }) %>
+  <%- include('components/meta', { title }) %>
 </head>
 
 <body class="">
   <div class="wrapper ">
-    <%- include('components/sidebar', { user: user, page: 'dashboard' }) %>
+    <%- include('components/sidebar', { user: user, page }) %>
     <div class="main-panel">
-      <%- include('components/navbar', { title: 'Главная' }) %>
+      <%- include('components/navbar', { title }) %>
       <div class="content">
         <div class="container-fluid">
           <div class="row">
