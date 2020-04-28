@@ -287,6 +287,18 @@ header.inner {
   background: var(--primary-hover-color);
   border: 1px solid var(--primary-hover-color); }
 
+.btn-danger {
+  background: #EA4335;
+  padding: 0.5rem;
+  color: white;
+  border: 1px solid #EA4335; }
+
+.btn-change {
+  background: #218838;
+  color: white;
+  padding: 0.5rem;
+  border: 1px solid #218838; }
+
 /* Home Search */
 .search-wrap {
   background: url("../img/showcase.jpg") no-repeat center center fixed/cover;
@@ -392,6 +404,12 @@ label {
   padding: 0.5rem;
   font-size: 18px;
   width: 100%;
+  margin-bottom: 1.2rem; }
+
+.input-box-contact {
+  padding: 0.5rem;
+  font-size: 18px;
+  width: 50%;
   margin-bottom: 1.2rem; }
 
 /* Tablets */

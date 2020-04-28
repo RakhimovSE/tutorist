@@ -47,15 +47,32 @@ new Vue({
         },
         async addStudent() {
             const {...students} = this.form;
-            const newStudent = await request('/api/addstudent', 'POST', students);
-            this.students.push(newStudent);
+            await request('/api/addstudent', 'POST', students);
+            request('/api/students', 'GET', null)
+                .then((response) => this.students = response);
             this.form = {};
+        },
+        async removeStudent(id) {
+            await request(`/api/removestudent/${id}`, 'DELETE')
+            request('/api/students', 'GET', null)
+                .then((response) => this.students = response);
         },
         async addContact() {
             const {...contacts} = this.contacts;
-            const newContact = await request('/api/addcontact', 'POST', contacts);
-            this.contactsArray.push(newContact);
+            await request('/api/addcontact', 'POST', contacts);
+            request('/api/contacts', 'GET', null)
+                .then((response) => this.contactsArray = response);
             this.contacts = {};
+        },
+        async changeContact(id, value) {
+            await request(`/api/changecontact/${id}`, 'PUT', {value: value})
+            request('/api/contacts', 'GET', null)
+                .then((response) => this.contactsArray = response);
+        },
+        async removeContact(id) {
+            await request(`/api/removecontact/${id}`, 'DELETE')
+            request('/api/contacts', 'GET', null)
+                .then((response) => this.contactsArray = response);
         }
     },
     async mounted() {

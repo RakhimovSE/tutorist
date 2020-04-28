@@ -14,16 +14,21 @@
         <div v-else-if="students.length">
             <div class="card mb-3" v-for="student in students">
                 <div class="card-body">
-                    <h4><center>{{student.firstName}} {{student.lastName}} {{student.middleName}} : {{student.role}}</center></h4>
+                    <h3>{{student.firstName}} {{student.lastName}} {{student.middleName}} : {{student.role}}</h3>
+                    <button class="btn-danger" @click="removeStudent(student.id)">Удалить</button>
                     <h4>Контакты: </h4>
                     <!-- Высокая сложность, каждый раз листаем контакты чтобы понять где наш id студента, надо придумать иначе
                          Хотя если предположить, что у каждого юзера по ~100 студентов, то не так страшно O(contact N * student N)-->
                     <div v-if="contactsArray.length">
                         <div v-for="contact in contactsArray">
-                            <div v-if="contact.studentId == student.id"><h5>{{contactTypes[contact.contactTypeId - 1].name}} : {{contact.value}}</h5></div>
+                            <div v-if="contact.studentId == student.id">
+                                <h5>{{contactTypes[contact.contactTypeId - 1].name}}</h5>
+                                <input type=text" class="input-box-contact" v-model="contact.value">
+                                <button class="btn-change" @click="changeContact(contact.id, contact.value)">Изменить</button>
+                                <button class="btn-danger" @click="removeContact(contact.id)">Удалить</button>
+                            </div>
                         </div>
                     </div>
-                    <div v-else>Нет контактов</div>
                 </div>
             </div>
         </div>
