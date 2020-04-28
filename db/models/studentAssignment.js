@@ -3,7 +3,7 @@
 module.exports = (sequelize, DataTypes) => {
     const StudentAssignment = sequelize.define('StudentAssignments', {
         student  : DataTypes.INTEGER,
-        assignment : DataTypes.INTEGER,
+        assignmentId : DataTypes.INTEGER,
         dueDate: DataTypes.DATE,
         points : DataTypes.INTEGER,
         archived : DataTypes.BOOLEAN,
@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
         note : DataTypes.TEXT
     }, {});
     StudentAssignment.associate = (models) => {
-        // associations can be defined here
+        StudentAssignment.hasMany(models.assignment, { foreignKey: 'assignmentId', as: 'assignments' })
     };
     return StudentAssignment;
 };
