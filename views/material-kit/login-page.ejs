@@ -1,0 +1,41 @@
+<%
+let title = 'Вход в личный кабинет';
+let page = 'login-page';
+%>
+<!--
+=========================================================
+Material Kit - v2.0.7
+=========================================================
+
+Product Page: https://www.creative-tim.com/product/material-kit
+Copyright 2020 Creative Tim (https://www.creative-tim.com/)
+
+Coded by Creative Tim
+
+=========================================================
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <link rel='stylesheet' href='/stylesheets/material-kit.css'/>
+  <%- include('../components/meta', { title }) %>
+</head>
+
+<body class="login-page sidebar-collapse">
+<%- include('components/navbar', { page }) %>
+  <div class="page-header header-filter" style="background-image: url('/material-kit/img/bg7.jpg'); background-size: cover; background-position: top center;">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-md-6 ml-auto mr-auto">
+          <%- include('components/card-login') %>
+        </div>
+      </div>
+    </div>
+    <%- include('components/footer', { page, className: 'footer-default' }) %>
+  </div>
+  <%- include('components/scripts') %>
+</body>
+
+</html>

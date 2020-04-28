@@ -6,8 +6,20 @@ router.get('/', async (req, res, next) => {
   if (req.user) {
     res.redirect('/dashboard');
   } else {
-    res.render('index');
+    res.render('material-kit/index');
   }
+});
+
+router.get('/login-page', helpers.ensureNotAuthenticated, async (req, res, next) => {
+  res.render('material-kit/login-page');
+});
+
+router.get('/landing-page', helpers.ensureNotAuthenticated, async (req, res, next) => {
+  res.render('material-kit/landing-page');
+});
+
+router.get('/profile-page', helpers.ensureNotAuthenticated, async (req, res, next) => {
+  res.render('material-kit/profile-page');
 });
 
 router.get('/dashboard', helpers.ensureAuthenticated, async (req, res, next) => {
@@ -72,10 +84,6 @@ router.get('/upgrade', helpers.ensureAuthenticated, async (req, res, next) => {
   };
 
   res.render('material-dashboard/upgrade', data);
-});
-
-router.get('/login', helpers.ensureNotAuthenticated, async (req, res, next) => {
-  res.render('login');
 });
 
 router.get('/logout', (req, res) => {
