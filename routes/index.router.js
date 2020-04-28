@@ -15,7 +15,7 @@ router.get('/dashboard', helpers.ensureAuthenticated, async (req, res, next) => 
     user: req.user,
   };
 
-  res.render('material-dashboard');
+  res.render('material-dashboard/dashboard', data);
 });
 
 router.get('/login', helpers.ensureNotAuthenticated, async (req, res, next) => {
