@@ -10,8 +10,8 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-router.get('/login-page', helpers.ensureNotAuthenticated, async (req, res, next) => {
-  res.render('material-kit/login-page');
+router.get('/login', helpers.ensureNotAuthenticated, async (req, res, next) => {
+  res.render('material-kit/login');
 });
 
 router.get('/landing-page', helpers.ensureNotAuthenticated, async (req, res, next) => {
