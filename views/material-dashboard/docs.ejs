@@ -1,0 +1,96 @@
+<%
+let title = 'Документация';
+let page = 'docs';
+%>
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <link rel='stylesheet' href='/stylesheets/material-dashboard.css'/>
+  <%- include('../components/meta', { title }) %>
+</head>
+
+<body class="offline-doc">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+    <div class="container-fluid">
+      <div class="navbar-wrapper">
+        <a class="navbar-brand" href="javascript:;">Material Dashboard</a>
+      </div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="navbar-toggler-icon icon-bar"></span>
+        <span class="navbar-toggler-icon icon-bar"></span>
+        <span class="navbar-toggler-icon icon-bar"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              Back to Dashboard
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/creativetimofficial/material-dashboard/issues" target="_blank">
+              Have an issue?
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- End Navbar -->
+  <div class="page-header clear-filter">
+    <div class="page-header-image" style="background-image: url('/material-dashboard/img/cover.jpg');"></div>
+    <div class="content-center">
+      <div class="col-md-8 ml-auto mr-auto">
+        <div class="brand">
+          <h1 class="title">
+            Material Dashboard
+          </h1>
+          <h3 class="description">Documentation v2.1.2</h3>
+          <br />
+          <a href="https://demos.creative-tim.com/material-dashboard/docs/2.1/getting-started/introduction.html" class="btn btn-primary btn-round btn-lg">View documentation</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="footer">
+    <div class="container-fluid">
+      <nav class="float-left">
+        <ul>
+          <li>
+            <a href="https://www.creative-tim.com">
+              Creative Tim
+            </a>
+          </li>
+          <li>
+            <a href="https://creative-tim.com/presentation">
+              About Us
+            </a>
+          </li>
+          <li>
+            <a href="http://blog.creative-tim.com">
+              Blog
+            </a>
+          </li>
+          <li>
+            <a href="https://www.creative-tim.com/license">
+              Licenses
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <div class="copyright float-right">
+        &copy;
+        <script>
+          document.write(new Date().getFullYear())
+        </script>, made with <i class="material-icons">favorite</i> by
+        <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
+      </div>
+    </div>
+  </footer>
+  <%- include('components/scripts') %>
+</body>
+
+</html>
