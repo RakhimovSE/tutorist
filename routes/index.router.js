@@ -3,7 +3,7 @@ const router = express.Router();
 const helpers = require('./helpers');
 
 router.get('/', async (req, res, next) => {
-  if (req.user) {
+  if (req.isAuthenticated()) {
     res.redirect('/dashboard');
   } else {
     res.render('material-kit/index');
@@ -20,6 +20,14 @@ router.get('/landing-page', helpers.ensureNotAuthenticated, async (req, res, nex
 
 router.get('/profile-page', helpers.ensureNotAuthenticated, async (req, res, next) => {
   res.render('material-kit/profile-page');
+});
+
+router.get('/docs', async (req, res, next) => {
+  if (req.isAuthenticated()) {
+    res.render('material-dashboard/docs');
+  } else {
+    res.render('material-kit/docs');
+  }
 });
 
 router.get('/dashboard', helpers.ensureAuthenticated, async (req, res, next) => {
