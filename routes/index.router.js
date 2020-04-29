@@ -30,12 +30,12 @@ router.get('/dashboard', helpers.ensureAuthenticated, async (req, res, next) => 
   res.render('material-dashboard/dashboard', data);
 });
 
-router.get('/user', helpers.ensureAuthenticated, async (req, res, next) => {
+router.get('/profile', helpers.ensureAuthenticated, async (req, res, next) => {
   const data = {
     user: req.user,
   };
 
-  res.render('material-dashboard/user', data);
+  res.render('material-dashboard/profile', data);
 });
 
 router.get('/tables', helpers.ensureAuthenticated, async (req, res, next) => {
