@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>studentAssignment-form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+<script src="https://unpkg.com/vue"></script>
+<div class="container p-md-2" id="studApp">
+    <h1>База заданий</h1>
+    <form @submit.prevent="addInfo">
+        <div class="form-group">
+            <label for="student">Студент</label>
+            <input type="text" class="form-control" id="student" aria-describedby="title-Help" placeholder="Инициалы студента" v-model="form.student">
+        </div>
+        <div class="form-group">
+            <label for="assignment">Задание</label>
+            <input type="text" class="form-control" id="assignment" placeholder="Номер задания" v-model="form.assignment">
+        </div>
+        <div class="form-group">
+            <label for="dueDate">Дедлайн</label>
+            <input type="text" class="form-control" id="dueDate" placeholder="Срок" v-model="form.dueDate">
+        </div>
+        <div class="form-group">
+            <label for="points">Баллы</label>
+            <input type="text" class="form-control" id="points" placeholder="Баллы за правильное выполнение задания" v-model="form.points">
+        </div>
+        <button type="submit" class="btn btn-primary">Отправить</button>
+    </form>
+</div>
+<script type='module' src="/api/studentsAssignments.js"></script>
+</body>
+</html>

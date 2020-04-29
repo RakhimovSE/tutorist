@@ -34,4 +34,11 @@ router.get('/assignments', (req, res) => {
   res.render('assignment_form.ejs', data)
 })
 
+router.get('/StudentAssignments', (req, res) => {
+  const data = {
+    user: req.user
+  }
+  res.render('studentAssignment_form.ejs', data)
+})
+
 module.exports = router;

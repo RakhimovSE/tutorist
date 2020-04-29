@@ -1,9 +1,9 @@
 'use strict';
 
 module.exports = (sequelize, DataTypes) => {
-    const StudentAssignment = sequelize.define('StudentAssignments', {
+    const StudentAssignment = sequelize.define('StudentAssignment', {
         student  : DataTypes.INTEGER,
-        assignmentId : DataTypes.INTEGER,
+        assignment : DataTypes.INTEGER,
         dueDate: DataTypes.DATE,
         points : DataTypes.INTEGER,
         archived : DataTypes.BOOLEAN,
@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
         note : DataTypes.TEXT
     }, {});
     StudentAssignment.associate = (models) => {
-        StudentAssignment.hasMany(models.assignment, { foreignKey: 'assignmentId', as: 'assignments' })
+        StudentAssignment.belongsToMany(models.Assignment, {through: 'AssignmentRelation', foreignKey : 'StudentAssignmentId'});
     };
     return StudentAssignment;
 };

@@ -10,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
         data : DataTypes.STRING
     }, {});
     Assignment.associate = (models) => {
-        // associations can be defined here
+        Assignment.belongsToMany(models.StudentAssignment, {through: 'AssignmentRelation'});
     };
     return Assignment;
 };
+
