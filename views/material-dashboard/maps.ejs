@@ -1,0 +1,42 @@
+<%
+let title = 'Карты';
+let page = 'maps';
+%>
+<!--
+=========================================================
+Material Dashboard - v2.1.2
+=========================================================
+
+Product Page: https://www.creative-tim.com/product/material-dashboard
+Copyright 2020 Creative Tim (https://www.creative-tim.com)
+Coded by Creative Tim
+
+=========================================================
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <link rel='stylesheet' href='/stylesheets/material-dashboard.css'/>
+  <%- include('../components/meta', { title }) %>
+</head>
+
+<body class="">
+  <div class="wrapper ">
+    <%- include('components/sidebar', { user: user, page }) %>
+    <div class="main-panel">
+      <%- include('components/navbar', { title }) %>
+      <div id="map"></div>
+    </div>
+  </div>
+  <%- include('components/fixed-plugin') %>
+  <%- include('components/scripts') %>
+  <script>
+    $(document).ready(function() {
+      // Javascript method's body can be found in assets/js/demos.js
+      // demo.initGoogleMaps();
+    });
+  </script>
+</body>
+
+</html>
