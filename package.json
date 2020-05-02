@@ -23,7 +23,8 @@
     "passport-yandex": "0.0.4",
     "pg": "^8.0.2",
     "pg-hstore": "^2.3.3",
-    "sequelize": "^5.21.6"
+    "sequelize": "^5.21.6",
+    "vue-table-dynamic": "^0.2.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.3",

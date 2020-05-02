@@ -1,4 +1,4 @@
-import Vue from 'https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.esm.browser.js'
+import Vue from 'https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.esm.browser.js';
 
 Vue.component('loader', {
     template: `
@@ -29,6 +29,7 @@ new Vue({
                 description: '',
             },
             students: [],
+            columns: ['Имя', 'Роль'],
             contactsArray: [],
             contactTypes: []
         }
@@ -45,12 +46,26 @@ new Vue({
           request('/api/contacts', 'GET', null)
               .then((response) => this.contactsArray = response);
         },
-        async addStudent() {
+        async studentProfile(id) {
+            location.href = `/students/${id}`
+        },
+        async studentProfileEdit(id) {
+            location.href = `/students/${id}/edit`
+        },
+        async addNewStudent() {
+            location.href = '/students/new';
+        },
+        async addStudentToDb() {
             const {...students} = this.form;
             await request('/api/addstudent', 'POST', students);
             request('/api/students', 'GET', null)
                 .then((response) => this.students = response);
-            this.form = {};
+        },
+        async changeStudent(id) {
+            const {...students} = this.form;
+            await request(`/api/changestudent/${id}`, 'PUT', students);
+            request('/api/students', 'GET', null)
+                .then((response) => this.students = response);
         },
         async removeStudent(id) {
             await request(`/api/removestudent/${id}`, 'DELETE')
@@ -62,7 +77,6 @@ new Vue({
             await request('/api/addcontact', 'POST', contacts);
             request('/api/contacts', 'GET', null)
                 .then((response) => this.contactsArray = response);
-            this.contacts = {};
         },
         async changeContact(id, value) {
             await request(`/api/changecontact/${id}`, 'PUT', {value: value})
@@ -74,6 +88,7 @@ new Vue({
             request('/api/contacts', 'GET', null)
                 .then((response) => this.contactsArray = response);
         }
+
     },
     async mounted() {
         this.loading = true;

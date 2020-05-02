@@ -28,6 +28,15 @@ router.post('/addstudent', (req, res) => {
         .then(() => res.status(200).json(formData));
 })
 
+router.put('/changestudent/:id', (req, res) => {
+    studentController.update(
+        req.body,
+        {where: {id: req.params.id}}
+    )
+        .then(() => res.status(200).json({message: 'Contact has been changed'}))
+        .catch(err => console.log(err));
+})
+
 router.delete('/removestudent/:id', (req, res) => {
     studentController.update(
         {deleted: true},
