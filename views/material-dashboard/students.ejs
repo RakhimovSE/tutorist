@@ -1,0 +1,170 @@
+<%
+let title = 'Ученики';
+let page = 'students';
+%>
+<!--
+=========================================================
+Material Dashboard - v2.1.2
+=========================================================
+
+Product Page: https://www.creative-tim.com/product/material-dashboard
+Copyright 2020 Creative Tim (https://www.creative-tim.com)
+Coded by Creative Tim
+
+=========================================================
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <link rel='stylesheet' href='/stylesheets/material-dashboard.css'/>
+  <%- include('../components/meta', { title }) %>
+  <script type="module" src="../../../api/students.api.js"></script>
+</head>
+
+<body class="">
+  <div class="wrapper ">
+    <%- include('components/sidebar', { user: user, page }) %>
+    <div class="main-panel">
+      <%- include('components/navbar', { title }) %>
+      <div class="content">
+      <div class="card">
+                      <div class="card-header card-header-primary">
+                        <h4 class="card-title">Ученики</h4>
+                      </div>
+    <div class="card-body">
+
+    <div id ="student">
+      <table class="table">
+          <thead>
+              <tr>
+                  <th class="text-center">#</th>
+                  <th>Имя</th>
+                  <th>Роль</th>
+                  <th class="text-right">Действие</th>
+              </tr>
+          </thead>
+
+
+          <tbody>
+          <template v-for="student in students">
+            <tr>
+               <td>{{student.id}}</td>
+               <td>{{student.firstName}} {{student.lastName}} {{student.middleName}}</td>
+               <td>{{student.role}}</td>
+                  <td class="td-actions text-right">
+                      <button @click="studentProfile(student.id)" type="button" rel="tooltip" class="btn btn-info">
+                          <i class="material-icons">person</i>
+                      </button>
+                      <button @click ="studentProfileEdit(student.id)" type="button" rel="tooltip" class="btn btn-success">
+                          <i class="material-icons">edit</i>
+                      </button>
+                      <button @click = "removeStudent(student.id)" type="button" rel="tooltip" class="btn btn-danger">
+                          <i class="material-icons">close</i>
+                      </button>
+                  </td>
+              </tr>
+              </template>
+          </tbody>
+      </table>
+      <button @click="addNewStudent()" class="btn btn-primary btn-round">Добавить ученика</button>
+      </div>
+      </div>
+</div>
+
+
+<!--
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title">Добавить ученика</h4>
+                  <p class="card-category">Введите данные</p>
+                </div>
+                <div class="card-body">
+
+
+                  <form @submit.prevent="addStudent">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Имя*</label>
+                          <input type="text" class="form-control" v-model="form.firstName" required>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Фамилия</label>
+                          <input type="text" class="form-control" v-model="form.lastName">
+                        </div>
+                      </div>
+                       <div class="col-md-4">
+                         <div class="form-group">
+                           <label class="bmd-label-floating">Отчество</label>
+                             <input type="text" class="form-control" v-model="form.middleName">
+                         </div>
+                       </div>
+                    </div>
+
+                      <div class="form-group">
+                        <label for="role">Роль</label>
+                        <select class="form-control" data-style="btn btn-link" id="role" v-model="form.role">
+                          <option>Ученик</option>
+                          <option>Родитель</option>
+                        </select>
+                      </div>
+
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group form-file-upload form-file-multiple">
+                            <input type="file" multiple="" class="inputFileHidden">
+                            <div class="input-group">
+                                <input type="text" class="form-control inputFileVisible" placeholder="Upload photo">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-fab btn-round btn-primary">
+                                        <i class="material-icons">attach_file</i>
+                                    </button>
+                                </span>
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+
+
+                    <input type="submit" class="btn btn-primary pull-right" value="Create">
+                    <div class="clearfix"></div>
+                  </form>
+
+
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="card card-profile">
+                <div class="card-avatar">
+                  <a href="javascript:;">
+                    <img class="img" src=<%= user.photoUrl %> />
+                  </a>
+                </div>
+                <div class="card-body">
+                  <h6 class="card-category text-gray">CEO / Co-Founder</h6>
+                  <h4 class="card-title"><%= `${user.firstName} ${user.lastName || ''}` %></h4>
+                  <p class="card-description">
+                    Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
+                  </p>
+                  <a href="javascript:;" class="btn btn-primary btn-round">Follow</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>-->
+      </div>
+      <%- include('components/footer') %>
+    </div>
+  </div>
+  <%- include('components/fixed-plugin') %>
+  <%- include('components/scripts') %>
+</body>
+</html>
