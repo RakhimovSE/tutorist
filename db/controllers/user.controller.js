@@ -1,4 +1,4 @@
-const { User } = require('../models/index');
+const { User } = require('../models');
 
 const getSerializedProfile = {
   'google': profile => (
@@ -36,16 +36,14 @@ const getSerializedProfile = {
   ),
 };
 
-exports.create = async (profile) => {
+exports.create = (profile) => {
   const profileSerialized = getSerializedProfile[profile.provider](profile);
 
-  const res = await User.findOrCreate({
+  return User.findOrCreate({
     where: {
       profileId: profileSerialized.profileId,
       profileProvider: profileSerialized.profileProvider,
     },
     defaults: profileSerialized
   });
-
-  return res;
 };

@@ -1,14 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const helpers = require('./helpers');
-const studentController = require('../db/controllers/student.controller');
 
-router.get('/', async (req, res, next) => {
-  if (req.isAuthenticated()) {
-    res.redirect('/dashboard');
-  } else {
-    res.render('material-kit/index');
-  }
+router.get('/', helpers.ensureNotAuthenticated, async (req, res, next) => {
+  res.render('material-kit/index');
 });
 
 router.get('/login', helpers.ensureNotAuthenticated, async (req, res, next) => {
@@ -99,61 +94,5 @@ router.get('/logout', (req, res) => {
   req.logout();
   res.redirect('/');
 });
-
-router.get('/students', (req, res) => {
-  const data = {
-    user: req.user
-  };
-  res.render('material-dashboard/students', data);
-})
-
-router.get('/students/:id', (req, res) => {
-  let data = {
-    user: req.user,
-    student: {},
-  };
-  if (req.params.id === 'new') {
-    res.render('material-dashboard/student-new', data)
-    return ;
-  }
-  studentController.findAll({
-    where: {
-      id: req.params.id,
-      deleted: false,
-      archived: false
-    }
-  })
-      .then(student => {
-        data.student = student[0];
-        res.render('material-dashboard/student-profile', data);
-      })
-      .catch(err => console.log(err));
-})
-
-router.get('/students/:id/edit', (req, res) => {
-  let data = {
-    user: req.user,
-    student: {},
-  };
-  studentController.findAll({
-    where: {
-      id: req.params.id,
-      deleted: false,
-      archived: false
-    }
-  })
-      .then(student => {
-        data.student = student[0];
-        res.render('material-dashboard/student-profile-edit', data);
-      })
-      .catch(err => console.log(err));
-})
-
-router.get('/students/new', (req, res) => {
-  const data = {
-    user: req.user
-  };
-  res.render('material-dashboard/student-new', data);
-})
 
 module.exports = router;

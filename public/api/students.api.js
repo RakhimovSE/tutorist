@@ -57,18 +57,18 @@ new Vue({
         },
         async addStudentToDb() {
             const {...students} = this.form;
-            await request('/api/addstudent', 'POST', students);
+            await request('/api/students/create', 'POST', students);
             request('/api/students', 'GET', null)
                 .then((response) => this.students = response);
         },
         async changeStudent(id) {
             const {...students} = this.form;
-            await request(`/api/changestudent/${id}`, 'PUT', students);
+            await request(`/api/students/update/${id}`, 'PUT', students);
             request('/api/students', 'GET', null)
                 .then((response) => this.students = response);
         },
         async removeStudent(id) {
-            await request(`/api/removestudent/${id}`, 'DELETE')
+            await request(`/api/students/delete/${id}`, 'DELETE')
             request('/api/students', 'GET', null)
                 .then((response) => this.students = response);
         },

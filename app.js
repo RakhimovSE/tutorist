@@ -6,10 +6,18 @@ let cookieSession = require('cookie-session')
 let passport = require('passport');
 let logger = require('morgan');
 
+/*****************/
+/** VIEW ROUTER **/
+/*****************/
 let indexRouter = require('./routes/index.router');
 let authRouter = require('./routes/auth.router');
-let usersRouter = require('./routes/users.router');
+let studentsRouter = require('./routes/students.router');
+
+/****************/
+/** API ROUTER **/
+/****************/
 let apiRouter = require('./routes/api.router')
+let studentsApiRouter = require('./routes/api/students.api.router');
 
 let app = express();
 
@@ -34,8 +42,9 @@ app.use(passport.session());
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
-app.use('/users', usersRouter);
+app.use('/students', studentsRouter);
 app.use('/api', apiRouter);
+app.use('/api/students', studentsApiRouter);
 
 
 // catch 404 and forward to error handler
