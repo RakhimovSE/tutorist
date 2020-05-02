@@ -1,14 +1,19 @@
-exports.ensureAuthenticated = (req, res, next) => {
-  if (req.isAuthenticated()) { return next(); }
+const userController = require('../db/controllers/user.controller');
+
+exports.ensureAuthenticated = async (req, res, next) => {
+  const user = await userController.get(req.user.id);
+  if (user) return next();
   res.redirect('/login')
 }
 
-exports.ensureAuthenticatedApi = (req, res, next) => {
-  if (req.isAuthenticated()) { return next(); }
+exports.ensureAuthenticatedApi = async (req, res, next) => {
+  const user = await userController.get(req.user.id);
+  if (user) return next();
   res.status(401).json({ error: 'You need to login as a tutor first' });
 }
 
-exports.ensureNotAuthenticated = (req, res, next) => {
-  if (!req.isAuthenticated()) { return next(); }
+exports.ensureNotAuthenticated = async (req, res, next) => {
+  const user = await userController.get(req.user.id);
+  if (!user) return next();
   res.redirect('/dashboard')
 }

@@ -11,20 +11,18 @@ module.exports = {
       studentId: {
         type: Sequelize.INTEGER,
         references: {
-          model: {
-            tableName: 'Students'
-          },
+          model: 'Students',
           key: 'id'
-        }
+        },
+        onDelete: 'cascade'
       },
       contactTypeId: {
         type: Sequelize.INTEGER,
         references: {
-          model: {
-            tableName: 'ContactTypes'
-          },
+          model: 'ContactTypes',
           key: 'id'
         },
+        onDelete: 'set null',
         allowNull: false
       },
       value: {

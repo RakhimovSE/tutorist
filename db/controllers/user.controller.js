@@ -36,6 +36,10 @@ const getSerializedProfile = {
   ),
 };
 
+exports.get = (userId) => {
+  return User.findByPk(userId);
+}
+
 exports.create = (profile) => {
   const profileSerialized = getSerializedProfile[profile.provider](profile);
 

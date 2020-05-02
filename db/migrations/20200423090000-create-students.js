@@ -28,11 +28,10 @@ module.exports = {
       tutorId: {
         type: Sequelize.INTEGER,
         references: {
-          model: {
-            tableName: 'Users'
-          },
-          key: 'id'
-        }
+          model: 'Users',
+          key: 'id',
+        },
+        onDelete: 'cascade'
       },
       archived: {
         type: Sequelize.BOOLEAN,
