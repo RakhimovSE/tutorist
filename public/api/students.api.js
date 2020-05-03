@@ -58,35 +58,32 @@ new Vue({
         async addStudentToDb() {
             const {...students} = this.form;
             await request('/api/students/create', 'POST', students);
-            request('/api/students', 'GET', null)
-                .then((response) => this.students = response);
+            this.students = await request('/api/students', 'GET', null);
+            location.href = '/students';
         },
         async changeStudent(id) {
             const {...students} = this.form;
             await request(`/api/students/update/${id}`, 'PUT', students);
-            request('/api/students', 'GET', null)
-                .then((response) => this.students = response);
+            this.students = await request('/api/students', 'GET', null);
+            location.href = '/students';
         },
         async removeStudent(id) {
             await request(`/api/students/delete/${id}`, 'DELETE')
-            request('/api/students', 'GET', null)
-                .then((response) => this.students = response);
+            this.students = await request('/api/students', 'GET', null);
+            toast('Ученик успешно удален');
         },
         async addContact() {
             const {...contacts} = this.contacts;
             await request('/api/addcontact', 'POST', contacts);
-            request('/api/contacts', 'GET', null)
-                .then((response) => this.contactsArray = response);
+            this.contactsArray = await request('/api/contacts', 'GET', null);
         },
         async changeContact(id, value) {
             await request(`/api/changecontact/${id}`, 'PUT', {value: value})
-            request('/api/contacts', 'GET', null)
-                .then((response) => this.contactsArray = response);
+            this.contactsArray = await request('/api/contacts', 'GET', null);
         },
         async removeContact(id) {
             await request(`/api/removecontact/${id}`, 'DELETE')
-            request('/api/contacts', 'GET', null)
-                .then((response) => this.contactsArray = response);
+            this.contactsArray = await request('/api/contacts', 'GET', null);
         }
 
     },

@@ -1,5 +1,5 @@
 <%
-let title = 'Ученики';
+let title = `Правка: ${student.firstName} ${student.lastName} ${student.middleName}`;
 let page = 'students';
 %>
 <!--
@@ -64,7 +64,7 @@ The above copyright notice and this permission notice shall be included in all c
                                                   <div class="form-group">
                                                     <label class="bmd-label-floating">Имя</label>
 
-                                                    <input type="text" class="form-control" value="<%= student.firstName%>" v-model="form.firstName">
+                                                    <input type="text" class="form-control" value="<%= student.firstName%>" v-model="form.firstName" required>
                                                   </div>
                                                 </div>
                                                 <div class="col-md-4">

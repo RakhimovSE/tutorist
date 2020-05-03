@@ -40,6 +40,28 @@
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="/material-dashboard/js/material-dashboard.js?v=2.1.2" type="text/javascript"></script>
 <script>
+  function toast(message, type = 'info', from = 'top', align = 'center') {
+    let types = ['', 'info', 'danger', 'success', 'warning', 'rose', 'primary'];
+
+    if (!types.includes(type)) {
+      let color = Math.floor((Math.random() * 6) + 1);
+      type = types[color];
+    }
+
+    $.notify({
+      icon: "add_alert",
+      message: message
+
+    }, {
+      type,
+      timer: 3000,
+      placement: {
+        from,
+        align
+      }
+    });
+  };
+
   $(document).ready(function() {
     $().ready(function() {
       $sidebar = $('.sidebar');
