@@ -4,19 +4,13 @@ new Vue({
     el: '#tutor',
     data() {
       return{
-          form: {
-              firstName: '',
-              lastName: '',
-              middleName: '',
-              email: ''
-
-          }
+          form: user
       }
     },
     methods: {
         async changeData() {
-            const {...users} = this.form;
-            await request(`/api/users/update`, 'PUT', users);
+            const {...data} = this.form;
+            await request(`/api/users/update`, 'PUT', data);
             toast('Данные успешно обновлены');
         }
     }

@@ -16,6 +16,9 @@ The above copyright notice and this permission notice shall be included in all c
 <!DOCTYPE html>
 <html lang="ru">
 <script type="module" src="../../../api/tutor.api.js"></script>
+<script>
+  let user = <%- JSON.stringify(user) %>;
+</script>
 <head>
   <link rel='stylesheet' href='/stylesheets/material-dashboard.css'/>
   <%- include('../components/meta', { title }) %>
