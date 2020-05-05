@@ -51,3 +51,9 @@ exports.create = (profile) => {
     defaults: profileSerialized
   });
 };
+
+exports.update = (userId, data) => {
+    return User.update(data, {
+        where: { id: userId }
+    });
+};

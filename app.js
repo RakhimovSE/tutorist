@@ -18,6 +18,7 @@ let studentsRouter = require('./routes/students.router');
 /****************/
 let apiRouter = require('./routes/api.router')
 let studentsApiRouter = require('./routes/api/students.api.router');
+let profileApiRouter = require('./routes/api/tutor.api.router');
 
 let app = express();
 
@@ -45,7 +46,7 @@ app.use('/auth', authRouter);
 app.use('/students', studentsRouter);
 app.use('/api', apiRouter);
 app.use('/api/students', studentsApiRouter);
-
+app.use('/api/users', profileApiRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

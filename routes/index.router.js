@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const helpers = require('./helpers');
 
+const userController = require('../db/controllers/user.controller');
+
 router.get('/', helpers.ensureNotAuthenticated, async (req, res, next) => {
   res.render('material-kit/index');
 });
@@ -36,7 +38,7 @@ router.get('/dashboard', helpers.ensureAuthenticated, async (req, res, next) => 
 
 router.get('/profile', helpers.ensureAuthenticated, async (req, res, next) => {
   const data = {
-    user: req.user,
+    user: await userController.get(req.user.id),
   };
 
   res.render('material-dashboard/profile', data);
