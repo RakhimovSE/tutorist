@@ -41,6 +41,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 app.use(passport.session());
 
+// file uploader
+app.use(fileUpload());
+
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/students', studentsRouter);
@@ -63,8 +66,5 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-// file uploader
-app.use(fileUpload());
 
 module.exports = app;

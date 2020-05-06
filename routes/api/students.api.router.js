@@ -1,5 +1,7 @@
 let express = require('express');
 let router = express.Router();
+let appRoot = require('app-root-path');
+let path = require('path');
 let helpers = require('../helpers');
 
 const studentController = require('../../db/controllers/student.controller');
@@ -64,15 +66,14 @@ router.delete('/delete/:id', helpers.ensureAuthenticatedApi, async (req, res) =>
 })
 
 router.post('/saveImage', helpers.ensureAuthenticatedApi, async (req, res) => {
-  console.log(req.files);
   if (!req.files || Object.keys(req.files).length === 0) {
     return res.status(400).send('No files were uploaded.');
   }
-  const fileName = req.files.fileInput.name;
-  console.log(req.files.name);
-  const path = __dirname + '/images/' + fileName
+  const fileInput = req.files.fileInput;
+  const filePath = path.join(appRoot.path, 'public', 'images', 'avatars', fileInput.name);
+  console.log(filePath);
 
-  image.mv(path, (error) => {
+  fileInput.mv(filePath, (error) => {
     if (error) {
       console.error(error)
       res.writeHead(500, {
@@ -85,7 +86,7 @@ router.post('/saveImage', helpers.ensureAuthenticatedApi, async (req, res) => {
     res.writeHead(200, {
       'Content-Type': 'application/json'
     })
-    res.end(JSON.stringify({ status: 'success', path: '/img/houses/' + fileName }))
+    res.end(JSON.stringify({ status: 'success', path: path.join('images', 'avatars', fileInput.name) }))
   })
 })
 

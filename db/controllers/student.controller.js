@@ -11,7 +11,8 @@ exports.get = (studentId) => {
       where: {
         deleted: false,
         archived: false
-      }
+      },
+      required: false
     }]
   });
 };
