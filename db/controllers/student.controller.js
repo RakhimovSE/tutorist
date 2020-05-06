@@ -1,11 +1,18 @@
-const { Student } = require('../models');
+const { Student, Contact } = require('../models');
 
 exports.get = (studentId) => {
   return Student.findByPk(studentId, {
     where: {
       deleted: false,
       archived: false
-    }
+    },
+    include: [{
+      model: Contact,
+      where: {
+        deleted: false,
+        archived: false
+      }
+    }]
   });
 };
 
@@ -22,6 +29,10 @@ exports.list = (tutorId) => {
 exports.create = (data) => {
   return Student.create(data);
 };
+
+exports.bulkCreate = (data) => {
+  return Student.bulkCreate(data);
+}
 
 exports.update = (studentId, data) => {
   return Student.update(data, {

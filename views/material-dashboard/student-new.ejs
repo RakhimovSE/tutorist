@@ -19,6 +19,9 @@ The above copyright notice and this permission notice shall be included in all c
 <head>
   <link rel='stylesheet' href='/stylesheets/material-dashboard.css'/>
   <%- include('../components/meta', { title }) %>
+   <script>
+      let student = <%- JSON.stringify(student) %>;
+    </script>
   <script type="module" src="../../../api/students.api.js"></script>
 </head>
 
@@ -70,15 +73,15 @@ The above copyright notice and this permission notice shall be included in all c
                       <div class="form-group">
                         <label for="role">Роль</label>
                         <select class="form-control" data-style="btn btn-link" id="role" v-model="form.role">
-                          <option value="student">Ученик</option>
-                          <option value="parent">Родитель</option>
+                          <option value="Ученик">Ученик</option>
+                          <option value="Родитель">Родитель</option>
                         </select>
                       </div>
 
                     <div class="row">
                       <div class="col-md-12">
                         <div class="form-group form-file-upload form-file-multiple">
-                            <input type="file" multiple="" class="inputFileHidden">
+                            <input type="file" accept="image/*" multiple="" class="inputFileHidden">
                             <div class="input-group">
                                 <input type="text" class="form-control inputFileVisible" placeholder="Upload photo">
                                 <span class="input-group-btn">
@@ -91,8 +94,57 @@ The above copyright notice and this permission notice shall be included in all c
                       </div>
                     </div>
 
+                    <div
+                                              v-for="(contact, counter) in form.Contacts"
+                                              v-bind:key="counter">
 
-                    <input type="submit" class="btn btn-primary pull-right" value="Create">
+                                                <a>{{counter+1}}. Контакт:</a>
+                                                <button @click="deleteContact(counter)" type="button" rel="tooltip" class="btn btn-danger">
+                                                     <i class="material-icons">close</i>
+                                                </button>
+
+                                                <div class="row">
+                                                <div class="col-md-4">
+                                                <div class="form-group">
+                                                <label class="bmd-label-floating">Тип контакта*:</label>
+                                                       <select class="form-control selectpicker" data-style="btn btn-link" v-model="contact.contactTypeId" required>
+                                                       <option v-for="contactType in contactTypes" type="hidden" :value="contactType.id">
+                                                           {{ contactType.name }}
+                                                       </option>
+                                                       </select>
+                                                </div>
+                                                </div>
+
+
+
+                                                <div class="col-md-4">
+                                                <div class="form-group">
+                                                <label class="bmd-label-floating">Значение*</label>
+                                                <input type="text" class="form-control" v-model="contact.value" required>
+
+                                                </div>
+                                                </div>
+
+
+
+                                                <div class="col-md-4">
+                                                <div class="form-group">
+                                                <label class="bmd-label-floating">Описание:</label>
+                                                <input type="text" class="form-control" v-model="contact.description">
+                                                </div>
+                                                </div>
+                                                </div>
+
+                                              </div>
+
+                    <div class="row">
+                    <div class="col-md-12">
+                    <button class="btn btn-primary pull-right" @click="addContact">Добавить контакт</button>
+                    </div>
+                    </div>
+
+
+                    <input type="submit" class="btn btn-primary pull-right" value="Создать">
                     <div class="clearfix"></div>
                   </form>
 

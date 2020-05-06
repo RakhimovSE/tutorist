@@ -19,6 +19,9 @@ The above copyright notice and this permission notice shall be included in all c
 <head>
   <link rel='stylesheet' href='/stylesheets/material-dashboard.css'/>
   <%- include('../components/meta', { title }) %>
+    <script>
+      let student = <%- JSON.stringify(student) %>;
+    </script>
   <script type="module" src="../../../api/students.api.js"></script>
 </head>
 
@@ -29,24 +32,35 @@ The above copyright notice and this permission notice shall be included in all c
       <%- include('components/navbar', { title }) %>
       <div class="content">
 
-
+      <div id ="student">
         <div class="container-fluid">
           <div class="row">
 
             <div class="col-md-4">
               <div class="card card-profile">
                 <div class="card-avatar">
-                  <a href="javascript:;">
-                    <img class="img" src=<%= user.photoUrl %> />
-                  </a>
+                   <div v-if="!image">
+                   <img class="img" src="../../../images/default-user.png" />
+                   </div>
+                   <div v-else>
+                    <img class="img" :src="image" />
+                    </div>
                 </div>
                 <div class="card-body">
-                  <h6 class="card-category text-gray">CEO / Co-Founder</h6>
-                  <h4 class="card-title"><%= `${user.firstName} ${user.lastName || ''}` %></h4>
-                  <p class="card-description">
-                    Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
-                  </p>
-                  <a href="javascript:;" class="btn btn-primary btn-round">Follow</a>
+                  <h5 class="card-category">Выберите фотографию</h5>
+                  <div class="form-group form-file-upload form-file-multiple">
+                      <input name="fileInput" id="fileInput" type="file" @change="onFileChange" style="display:none;" />
+                      <div class="input-group">
+                          <input type="text" class="form-control inputFileVisible" placeholder="Choose a file">
+                          <span class="input-group-btn">
+                              <button onclick="document.getElementById('fileInput').click();" type="button" class="btn btn-fab btn-round btn-primary">
+                                  <i class="material-icons">attach_file</i>
+                              </button>
+                          </span>
+                      </div>
+                    </div>
+
+                  <a href="javascript:;" class="btn btn-primary btn-round">Загрузить</a>
                 </div>
               </div>
             </div>
@@ -57,7 +71,7 @@ The above copyright notice and this permission notice shall be included in all c
                     <h4 class="card-title">Информация</h4>
                        </div>
                           <div class="card-body">
-                          <div id ="student">
+
                                              <form @submit.prevent="changeStudent(<%= student.id %>)">
                                               <div class="row">
                                                 <div class="col-md-4">
@@ -91,19 +105,62 @@ The above copyright notice and this permission notice shall be included in all c
 
                                               <div class="row">
                                                 <div class="col-md-12">
-                                                  <div class="form-group form-file-upload form-file-multiple">
-                                                      <input type="file" multiple="" class="inputFileHidden">
-                                                      <div class="input-group">
-                                                          <input type="text" class="form-control inputFileVisible" placeholder="Upload photo">
-                                                          <span class="input-group-btn">
-                                                              <button type="button" class="btn btn-fab btn-round btn-primary">
-                                                                  <i class="material-icons">attach_file</i>
-                                                              </button>
-                                                          </span>
-                                                      </div>
-                                                    </div>
+
+
+
                                                 </div>
                                               </div>
+
+                                              <div
+                                                                                            v-for="(contact, counter) in form.Contacts"
+                                                                                            v-bind:key="counter">
+
+                                                                                              <a>{{counter+1}}. Контакт:</a>
+                                                                                              <button @click="deleteContact(counter)" type="button" rel="tooltip" class="btn btn-danger">
+                                                                                                   <i class="material-icons">close</i>
+                                                                                              </button>
+
+                                                                                              <div class="row">
+                                                                                              <div class="col-md-4">
+                                                                                              <div class="form-group">
+                                                                                              <label class="bmd-label-floating">Тип контакта*:</label>
+                                                                                                     <select class="form-control " data-style="btn btn-link" v-model="contact.contactTypeId" required>
+                                                                                                     <option v-for="contactType in contactTypes" type="hidden" :value="contactType.id">
+                                                                                                         {{ contactType.name }}
+                                                                                                     </option>
+                                                                                                     </select>
+                                                                                              </div>
+                                                                                              </div>
+
+
+
+                                                                                              <div class="col-md-4">
+                                                                                              <div class="form-group">
+                                                                                              <label class="bmd-label-floating">Значение*</label>
+                                                                                              <input type="text" class="form-control" v-model="contact.value" required>
+
+                                                                                              </div>
+                                                                                              </div>
+
+
+
+                                                                                              <div class="col-md-4">
+                                                                                              <div class="form-group">
+                                                                                              <label class="bmd-label-floating">Описание:</label>
+                                                                                              <input type="text" class="form-control" v-model="contact.description">
+                                                                                              </div>
+                                                                                              </div>
+                                                                                              </div>
+
+                                                                                            </div>
+
+                                                                  <div class="row">
+                                                                  <div class="col-md-12">
+                                                                  <button class="btn btn-primary pull-right" @click="addContact">Добавить контакт</button>
+                                                                  </div>
+                                                                  </div>
+
+
                                               <input type="submit" class="btn btn-primary pull-right" value="Сохранить">
                                               <div class="clearfix"></div>
                                               </form>

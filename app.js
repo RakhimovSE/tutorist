@@ -5,6 +5,7 @@ let path = require('path');
 let cookieSession = require('cookie-session')
 let passport = require('passport');
 let logger = require('morgan');
+let fileUpload = require('express-fileupload')
 
 /*****************/
 /** VIEW ROUTER **/
@@ -62,5 +63,8 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+// file uploader
+app.use(fileUpload());
 
 module.exports = app;

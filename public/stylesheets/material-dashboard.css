@@ -12008,8 +12008,10 @@ html[dir="rtl"] .form-check .form-check-sign .check:before {
     .card-profile .card-avatar + .card-body {
       margin-top: 15px; }
     .card-profile .card-avatar img {
-      width: 100%;
-      height: auto; }
+      width: 150px;
+      height: 150px;
+      object-fit:cover;
+    }
   .card-profile .card-body + .card-footer {
     margin-top: -15px; }
   .card-profile .card-footer .btn.btn-just-icon {
@@ -12021,8 +12023,8 @@ html[dir="rtl"] .form-check .form-check-sign .check:before {
   .card-profile .card-header:not([class*="card-header-"]) {
     background: transparent; }
   .card-profile .card-avatar {
-    max-width: 130px;
-    max-height: 130px; }
+    max-width: 150px;
+    max-height: 150px; }
 
 .card-plain {
   background: transparent;

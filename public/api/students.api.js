@@ -15,13 +15,7 @@ new Vue({
     data() {
         return {
             loading: false,
-            form: {
-                firstName: '',
-                lastName: '',
-                middleName: '',
-                photoUrl: '',
-                role: ''
-            },
+            form: student,
             contacts:{
                 studentId: -1,
                 contactTypeId: -1,
@@ -29,25 +23,51 @@ new Vue({
                 description: '',
             },
             students: [],
-            columns: ['Имя', 'Роль'],
-            contactsArray: [],
-            contactTypes: []
+            contactTypes: [],
+            image: ''
         }
     },
     created() {
         this.fetchData();
     },
     methods: {
+        onFileChange(e) {
+            let files = e.target.files || e.dataTransfer.files;
+            if (!files.length)
+                return;
+            this.createImage(files[0]);
+            let formData = new FormData();
+            formData.append('fileInput', files[0]);
+            console.log(formData.values(), files);
+            fetch('/api/students/saveImage', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => console.log(data.path))
+                .catch(error => console.log(error))
+        },
+        createImage(file) {
+            let image = new Image();
+            let reader = new FileReader();
+            let vm = this;
+
+            reader.onload = (e) => {
+                vm.image = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        },
+        removeImage: function (e) {
+            this.image = '';
+        },
         fetchData() {
           request('/api/students', 'GET', null)
               .then((response) => this.students = response);
           request('/api/contacttypes', 'GET', null)
               .then((response) => this.contactTypes = response);
-          request('/api/contacts', 'GET', null)
-              .then((response) => this.contactsArray = response);
         },
         async studentProfile(id) {
-            location.href = `/students/${id}`
+            location.href = `/students/${id}`;
         },
         async studentProfileEdit(id) {
             location.href = `/students/${id}/edit`
@@ -73,22 +93,16 @@ new Vue({
                 .then((response) => this.students = response);
         },
         async addContact() {
-            const {...contacts} = this.contacts;
-            await request('/api/addcontact', 'POST', contacts);
-            request('/api/contacts', 'GET', null)
-                .then((response) => this.contactsArray = response);
+            this.form.Contacts.push({
+                studentId: -1,
+                contactTypeId: -1,
+                value: '',
+                description: ''
+            });
         },
-        async changeContact(id, value) {
-            await request(`/api/changecontact/${id}`, 'PUT', {value: value})
-            request('/api/contacts', 'GET', null)
-                .then((response) => this.contactsArray = response);
+        async deleteContact(index) {
+            this.form.Contacts.splice(index, 1);
         },
-        async removeContact(id) {
-            await request(`/api/removecontact/${id}`, 'DELETE')
-            request('/api/contacts', 'GET', null)
-                .then((response) => this.contactsArray = response);
-        }
-
     },
     async mounted() {
         this.loading = true;

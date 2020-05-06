@@ -19,6 +19,10 @@ The above copyright notice and this permission notice shall be included in all c
 <head>
   <link rel='stylesheet' href='/stylesheets/material-dashboard.css'/>
   <%- include('../components/meta', { title }) %>
+  <script>
+    let student = <%- JSON.stringify(student) %>;
+  </script>
+
   <script type="module" src="../../../api/students.api.js"></script>
 </head>
 
@@ -105,6 +109,55 @@ The above copyright notice and this permission notice shall be included in all c
                                                     </div>
                                                 </div>
                                               </div>
+
+                                              <div
+                                                                                            v-for="(contact, counter) in form.Contacts"
+                                                                                            v-bind:key="counter">
+
+                                                                                              <a>{{counter+1}}. Контакт:</a>
+
+                                                                                              <div class="row">
+                                                                                              <div class="col-md-4">
+                                                                                              <div class="form-group">
+                                                                                              <label class="bmd-label-floating">Тип контакта*:</label>
+                                                                                                     <select class="form-control" data-style="btn btn-link" v-model="contact.contactTypeId" disabled>
+                                                                                                     <option v-for="contactType in contactTypes" type="hidden" :value="contactType.id">
+                                                                                                         {{ contactType.name }}
+                                                                                                     </option>
+                                                                                                     </select>
+                                                                                              </div>
+                                                                                              </div>
+
+
+
+                                                                                              <div class="col-md-4">
+                                                                                              <div class="form-group">
+                                                                                              <label class="bmd-label-floating">Значение*</label>
+                                                                                              <input type="text" class="form-control" v-model="contact.value" disabled>
+
+                                                                                              </div>
+                                                                                              </div>
+
+
+
+                                                                                              <div class="col-md-4">
+                                                                                              <div class="form-group">
+                                                                                              <label class="bmd-label-floating">Описание:</label>
+                                                                                              <input type="text" class="form-control" v-model="contact.description" disabled>
+                                                                                              </div>
+                                                                                              </div>
+                                                                                              </div>
+
+                                                                                            </div>
+
+                                                                  <div class="row">
+                                                                  <div class="col-md-12">
+
+                                                                  </div>
+                                                                  </div>
+
+
+
                                               <button @click="studentProfileEdit(<%=student.id%>)" class="btn btn-primary">Изменить</button>
                                               <div class="clearfix"></div>
 
