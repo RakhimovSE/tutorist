@@ -100,6 +100,9 @@ new Vue({
         },
         async removeStudent(id) {
             await request(`/api/students/delete/${id}`, 'DELETE')
+            request('api/students', 'GET')
+                .then(response => this.students = response)
+                .catch(error => console.log(error));
         },
         async addContact() {
             this.form.Contacts.push({
