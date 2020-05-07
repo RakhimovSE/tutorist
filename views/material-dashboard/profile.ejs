@@ -2,17 +2,6 @@
 let title = 'Профиль';
 let page = 'profile';
 %>
-<!--
-=========================================================
-Material Dashboard - v2.1.2
-=========================================================
-
-Product Page: https://www.creative-tim.com/product/material-dashboard
-Copyright 2020 Creative Tim (https://www.creative-tim.com)
-Coded by Creative Tim
-
-=========================================================
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
 <!DOCTYPE html>
 <html lang="ru">
 <script type="module" src="../../../api/tutor.api.js"></script>
@@ -44,13 +33,13 @@ The above copyright notice and this permission notice shall be included in all c
                         <div class="col-md-6">
                           <div class="form-group">
                             <label class="bmd-label-floating">Имя пользователя</label>
-                            <input type="text" class="form-control" value=<%= user.username%>>
+                            <input type="text" id="username" class="form-control" v-model="form.username">
                           </div>
                         </div>
                         <div class="col-md-6">
-                          <div class="form-group">
+                          <div class="form-group ">
                             <label class="bmd-label-floating">Email</label>
-                            <input type="email" class="form-control" id="email" v-model="form.email">
+                            <input type="email" value="<%= user.email%>"  class=" form-control" id="email" v-model="form.email" disabled>
                           </div>
                         </div>
                       </div>
@@ -58,7 +47,7 @@ The above copyright notice and this permission notice shall be included in all c
                         <div class="col-md-4">
                           <div class="form-group">
                             <label class="bmd-label-floating">Имя</label>
-                            <input type="text" id="firstName" class="form-control" v-model="form.firstName">
+                            <input type="text" disabled="disabled" id="firstName" class="form-control" v-model="form.firstName">
                           </div>
                         </div>
                         <div class="col-md-4">
@@ -86,7 +75,7 @@ The above copyright notice and this permission notice shall be included in all c
                         <div class="col-md-4">
                         </div>
                       </div>
-                      <button type="submit"  class=" btn btn-primary pull-right">Подтвердить изменения</button>
+                      <button type="submit" onClick="setTimeout(function() {window.location.reload();}, 1500)"  class=" btn btn-primary pull-right">Подтвердить изменения</button>
                       <div class="clearfix"></div>
                     </form>
                   </div>
@@ -101,7 +90,8 @@ The above copyright notice and this permission notice shall be included in all c
                   </a>
                 </div>
                 <div class="card-body">
-                  <h4 class="card-title"><%= `${user.firstName} ${user.lastName || ''}` %></h4>
+                  <h6 class=" card-category text-gray"><%= `${user.username} ` %></h6>
+                  <h4 class="card-title"><%= `${user.lastName} ${user.firstName || ''} ${user.middleName}` %></h4>
 
                 </div>
               </div>

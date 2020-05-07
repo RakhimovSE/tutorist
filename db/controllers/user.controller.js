@@ -3,6 +3,7 @@ const { User } = require('../models');
 const getSerializedProfile = {
   'google': profile => (
     {
+      username: null,
       firstName: profile.name.givenName,
       lastName: profile.name.familyName,
       middleName: null,
@@ -14,6 +15,7 @@ const getSerializedProfile = {
   ),
   'vkontakte': profile => (
     {
+      username: null,
       firstName: profile.name.givenName,
       lastName: profile.name.familyName,
       middleName: null,
@@ -25,6 +27,7 @@ const getSerializedProfile = {
   ),
   'yandex': profile => (
     {
+      username: null,
       firstName: profile.name.familyName,
       lastName: profile.name.givenName,
       middleName: null,
