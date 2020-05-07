@@ -3,6 +3,7 @@ let router = express.Router();
 let appRoot = require('app-root-path');
 let path = require('path');
 let helpers = require('../helpers');
+let jimp = require('jimp');
 
 const studentController = require('../../db/controllers/student.controller');
 const contactController = require('../../db/controllers/contact.controller');
@@ -16,11 +17,12 @@ router.post('/create', helpers.ensureAuthenticatedApi, async (req, res) => {
   const data = { firstName: req.body.firstName,
                   lastName: req.body.lastName,
                   middleName: req.body.middleName,
-                  photoUrl: req.body.photoUrl,
                   role: req.body.role,
                   tutorId: req.user.id };
   let student = await studentController.create(data);
-  let contacts = {};
+  console.log(req.body.photoUrl);
+  const newPhotoUrl = req.body.photoUrl == '' ? `../../../images/avatars/${student.id}.jpg` : req.body.photoUrl;
+  await studentController.update(student.id, { photoUrl: newPhotoUrl });
   if (req.body.Contacts.length > 0) {
     req.body.Contacts
         .map(contact => contact.studentId = student.id);
@@ -42,12 +44,11 @@ router.put('/update/:id', helpers.ensureAuthenticatedApi, async (req, res) => {
         .map(v => v.id);
     let arr2 = req.body.Contacts
         .map(v => v.id);
-    let toDelete = arr1
+    arr1
         .filter(id => !arr2.includes(id))
         .forEach(id => {
           contactController.update(id, {deleted: true})
         });
-    console.log(toDelete);
     if (req.body.Contacts.length > 0) {
     req.body.Contacts
         .map(contact => contact.studentId = req.params.id);
@@ -65,28 +66,22 @@ router.delete('/delete/:id', helpers.ensureAuthenticatedApi, async (req, res) =>
   res.status(200).json({ message: 'Student has been deleted' });
 })
 
-router.post('/saveImage', helpers.ensureAuthenticatedApi, async (req, res) => {
+router.post('/saveImage/:id', helpers.ensureAuthenticatedApi, async (req, res) => {
   if (!req.files || Object.keys(req.files).length === 0) {
     return res.status(400).send('No files were uploaded.');
   }
   const fileInput = req.files.fileInput;
-  const filePath = path.join(appRoot.path, 'public', 'images', 'avatars', fileInput.name);
-  console.log(filePath);
 
-  fileInput.mv(filePath, (error) => {
-    if (error) {
-      console.error(error)
-      res.writeHead(500, {
-        'Content-Type': 'application/json'
-      })
-      res.end(JSON.stringify({ status: 'error', message: error }))
-      return
-    }
-
-    res.writeHead(200, {
-      'Content-Type': 'application/json'
-    })
-    res.end(JSON.stringify({ status: 'success', path: path.join('images', 'avatars', fileInput.name) }))
+  jimp.read(fileInput.data, (err, image) => {
+    if (err) throw err;
+    let len = image.bitmap.height < image.bitmap.width ? image.bitmap.height : image.bitmap.width;
+    let fixHeight = len == image.bitmap.height ? false : true;
+    let x = fixHeight ? 0: image.bitmap.width / 2 - len / 2;
+    let y = fixHeight ? image.bitmap.height / 2 - len / 2: 0;
+    image
+        .crop(x, y, len, len)
+        .quality(60)
+        .write(path.join(appRoot.path, 'public', 'images', 'avatars', `${req.params.id}.jpg`));
   })
 })
 

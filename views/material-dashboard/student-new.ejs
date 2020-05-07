@@ -70,6 +70,22 @@ The above copyright notice and this permission notice shall be included in all c
                        </div>
                     </div>
 
+                    <div class="form-group form-file-upload form-file-multiple">
+                                                            <input name="fileInput" id="fileInput" type="file"
+                                                                   @change="onFileChange" style="display:none;"/>
+                                                            <div class="input-group">
+                                                              <input type="text" class="form-control inputFileVisible" v-model="fileName" disabled>
+                                                              <span class="input-group-btn">
+                                                                      <button
+                                                                          onclick="document.getElementById('fileInput').click();"
+                                                                          type="button"
+                                                                          class="btn btn-fab btn-round btn-primary">
+                                                                          <i class="material-icons">attach_file</i>
+                                                                      </button>
+                                                                  </span>
+                                                            </div>
+                                                          </div>
+
                       <div class="form-group">
                         <label for="role">Роль</label>
                         <select class="form-control" data-style="btn btn-link" id="role" v-model="form.role">
@@ -77,29 +93,12 @@ The above copyright notice and this permission notice shall be included in all c
                           <option value="Родитель">Родитель</option>
                         </select>
                       </div>
-
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="form-group form-file-upload form-file-multiple">
-                            <input type="file" accept="image/*" multiple="" class="inputFileHidden">
-                            <div class="input-group">
-                                <input type="text" class="form-control inputFileVisible" placeholder="Upload photo">
-                                <span class="input-group-btn">
-                                    <button type="button" class="btn btn-fab btn-round btn-primary">
-                                        <i class="material-icons">attach_file</i>
-                                    </button>
-                                </span>
-                            </div>
-                          </div>
-                      </div>
-                    </div>
-
                     <div
                                               v-for="(contact, counter) in form.Contacts"
                                               v-bind:key="counter">
 
                                                 <a>{{counter+1}}. Контакт:</a>
-                                                <button @click="deleteContact(counter)" type="button" rel="tooltip" class="btn btn-danger">
+                                                <button @click="deleteContact(counter)" type="button" rel="tooltip" class="btn-small btn-danger">
                                                      <i class="material-icons">close</i>
                                                 </button>
 
@@ -155,19 +154,15 @@ The above copyright notice and this permission notice shall be included in all c
 
             <div class="col-md-4">
               <div class="card card-profile">
-                <div class="card-avatar">
-                  <a href="javascript:;">
-                    <img class="img" src=<%= user.photoUrl %> />
-                  </a>
-                </div>
-                <div class="card-body">
-                  <h6 class="card-category text-gray">CEO / Co-Founder</h6>
-                  <h4 class="card-title"><%= `${user.firstName} ${user.lastName || ''}` %></h4>
-                  <p class="card-description">
-                    Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
-                  </p>
-                  <a href="javascript:;" class="btn btn-primary btn-round">Follow</a>
-                </div>
+               <div class="card-avatar">
+                                 <div v-if="!image">
+                                   <img class="img" src="../../../images/default-user.png"/>
+                                 </div>
+                                 <div v-else>
+                                   <img class="img" :src="image"/>
+                                 </div>
+                               </div>
+
               </div>
             </div>
           </div>

@@ -2,11 +2,11 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('ContactTypes', [
-      { name: 'tel' },
-      { name: 'email' },
-      { name: 'skype' },
-      { name: 'url' },
-      { name: 'other' }
+      { name: 'Телефон' },
+      { name: 'Email' },
+      { name: 'Skype' },
+      { name: 'URL' },
+      { name: 'Другое' }
     ], {});
   },
 

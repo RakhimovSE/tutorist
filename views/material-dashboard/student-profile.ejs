@@ -40,17 +40,11 @@ The above copyright notice and this permission notice shall be included in all c
             <div class="col-md-4">
               <div class="card card-profile">
                 <div class="card-avatar">
-                  <a href="javascript:;">
-                    <img class="img" src=<%= user.photoUrl %> />
-                  </a>
+                     <img class="img" src="<%= student.photoUrl%>"/>
                 </div>
                 <div class="card-body">
-                  <h6 class="card-category text-gray">CEO / Co-Founder</h6>
-                  <h4 class="card-title"><%= `${user.firstName} ${user.lastName || ''}` %></h4>
-                  <p class="card-description">
-                    Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
-                  </p>
-                  <a href="javascript:;" class="btn btn-primary btn-round">Follow</a>
+                  <h6 class="card-category text-gray"><%= student.role%></h6>
+                  <h4 class="card-title"><%= `${student.firstName} ${student.lastName || ''}` %></h4>
                 </div>
               </div>
             </div>
@@ -93,22 +87,6 @@ The above copyright notice and this permission notice shall be included in all c
                                                     <option>Родитель</option>
                                                   </select>
                                                 </div>
-
-                                              <div class="row">
-                                                <div class="col-md-12">
-                                                  <div class="form-group form-file-upload form-file-multiple">
-                                                      <input type="file" multiple="" class="inputFileHidden">
-                                                      <div class="input-group">
-                                                          <input type="text" class="form-control inputFileVisible" placeholder="Upload photo">
-                                                          <span class="input-group-btn">
-                                                              <button type="button" class="btn btn-fab btn-round btn-primary">
-                                                                  <i class="material-icons">attach_file</i>
-                                                              </button>
-                                                          </span>
-                                                      </div>
-                                                    </div>
-                                                </div>
-                                              </div>
 
                                               <div
                                                                                             v-for="(contact, counter) in form.Contacts"
