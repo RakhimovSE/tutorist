@@ -1,4 +1,4 @@
-const { Contact, Student } = require('../models');
+const { Contact, Student } = require('~root/db/models');
 
 exports.get = (contactId) => {
     return Contact.findByPk(contactId, {

@@ -1,8 +1,7 @@
 let express = require('express');
 let router = express.Router();
 
-const contactTypeController = require('../db/controllers/contact-type.controller')
-const contactController = require('../db/controllers/contact.controller')
+const contactTypeController = require('~root/db/controllers/contact-type.controller')
 
 router.get('/contacttypes', (req, res) => {
     setTimeout(() => {

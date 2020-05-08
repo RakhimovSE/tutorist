@@ -2,11 +2,11 @@ let express = require('express');
 let router = express.Router();
 let appRoot = require('app-root-path');
 let path = require('path');
-let helpers = require('../helpers');
+let helpers = require('~root/routes/helpers');
 let jimp = require('jimp');
 
-const studentController = require('../../db/controllers/student.controller');
-const contactController = require('../../db/controllers/contact.controller');
+const studentController = require('~root/db/controllers/student.controller');
+const contactController = require('~root/db/controllers/contact.controller');
 
 router.get('/', helpers.ensureAuthenticatedApi, async (req, res) => {
   const students = await studentController.list(req.user.id);

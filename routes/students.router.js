@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const helpers = require('./helpers');
-const studentController = require('../db/controllers/student.controller');
+const studentController = require('~root/db/controllers/student.controller');
 
 router.get('/', helpers.ensureAuthenticated, (req, res) => {
   const data = {
