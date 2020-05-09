@@ -27,7 +27,10 @@ exports.list = (tutorId) => {
       tutorId: tutorId,
       deleted: false,
       archived: false
-    }
+    },
+    order: [
+      ['firstName', 'asc']
+    ]
   });
 };
 
