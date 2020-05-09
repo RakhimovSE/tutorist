@@ -1,8 +1,8 @@
 const { Student, Contact } = require('~root/db/models');
 
-const updatePhoto = (photoFile) => {
+function updatePhoto(photoFile) {
 
-};
+}
 
 exports.get = (studentId) => {
   return Student.findByPk(studentId, {
@@ -28,9 +28,7 @@ exports.list = (tutorId) => {
       deleted: false,
       archived: false
     },
-    order: [
-      ['firstName', 'asc']
-    ]
+    order: ['firstName']
   });
 };
 

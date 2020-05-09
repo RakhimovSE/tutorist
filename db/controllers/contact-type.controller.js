@@ -1,5 +1,7 @@
 const { ContactType } = require('~root/db/models');
 
 exports.list = () => {
-  return ContactType.findAll();
+  return ContactType.findAll({
+    order: ['id']
+  });
 }

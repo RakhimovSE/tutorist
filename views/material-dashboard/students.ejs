@@ -19,7 +19,7 @@ The above copyright notice and this permission notice shall be included in all c
 <head>
   <link rel='stylesheet' href='/stylesheets/material-dashboard.css'/>
   <%- include('../components/meta', { title }) %>
-  <script type="module" src="../../../api/students.api.js"></script>
+  <script type="module" src="/api/students.api.js"></script>
 </head>
 
 <body class="">
@@ -40,7 +40,7 @@ The above copyright notice and this permission notice shall be included in all c
                   </div>
                   <div class="card-body">
                     <h6 class="card-category text-gray">{{ student.role }}</h6>
-                    <h4 class="card-title">{{ `${student.firstName} ${student.lastName || ''}` }}</h4>
+                    <h4 class="card-title">{{ student.fullName }}</h4>
                   </div>
                   <div class="row">
                     <div class="col-md-4">

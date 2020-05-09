@@ -1,5 +1,5 @@
 <%
-let title = `${student.firstName} ${student.lastName}`;
+let title = student.fullName;
 let page = 'students';
 %>
 <!--
@@ -41,7 +41,7 @@ The above copyright notice and this permission notice shall be included in all c
               </div>
               <div class="card-body">
                 <h6 class="card-category text-gray"><%= student.role %></h6>
-                <h4 class="card-title"><%= `${student.firstName} ${student.lastName || ''}` %></h4>
+                <h4 class="card-title"><%= student.fullName %></h4>
               </div>
             </div>
           </div>
