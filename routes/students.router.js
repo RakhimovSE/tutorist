@@ -17,7 +17,7 @@ router.get('/new', helpers.ensureAuthenticated, (req, res) => {
       firstName: '',
       lastName: '',
       photoUrl: '',
-      role: '',
+      role: 'student',
       tutorId: -1,
       Contacts: []
     }

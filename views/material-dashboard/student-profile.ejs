@@ -23,137 +23,144 @@ The above copyright notice and this permission notice shall be included in all c
     let student = <%- JSON.stringify(student) %>;
   </script>
 
-  <script type="module" src="../../../api/students.api.js"></script>
+  <script type="module" src="/api/students.api.js"></script>
 </head>
 
 <body class="">
-  <div class="wrapper ">
-    <%- include('components/sidebar', { user: user, page }) %>
-    <div class="main-panel">
-      <%- include('components/navbar', { title }) %>
-      <div class="content">
-
-
-        <div class="container-fluid">
-          <div class="row">
-
-            <div class="col-md-4">
-              <div class="card card-profile">
-                <div class="card-avatar">
-                     <img class="img" src="<%= student.photoUrl%>"/>
-                </div>
-                <div class="card-body">
-                  <h6 class="card-category text-gray"><%= student.role%></h6>
-                  <h4 class="card-title"><%= `${student.firstName} ${student.lastName || ''}` %></h4>
+<div class="wrapper ">
+  <%- include('components/sidebar', { user: user, page }) %>
+  <div class="main-panel">
+    <%- include('components/navbar', { title }) %>
+    <div class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card card-profile">
+              <div class="card-avatar">
+                <img class="img" src="<%= student.photoUrl || '/images/default-user.png' %>"/>
+              </div>
+              <div class="card-body">
+                <h6 class="card-category text-gray"><%= student.role %></h6>
+                <h4 class="card-title"><%= `${student.firstName} ${student.lastName || ''}` %></h4>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="card">
+              <div class="card-header card-header-primary">
+                <h4 class="card-title">Информация</h4>
+              </div>
+              <div class="card-body">
+                <div id="student">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label class="bmd-label-floating">Имя</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            value="<%= student.firstName %>"
+                            disabled
+                        >
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label class="bmd-label-floating">Фамилия</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            value="<%= student.lastName %>"
+                            disabled
+                        >
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label class="bmd-label-floating">Отчество</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            value="<%= student.middleName %>"
+                            disabled
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="role">Роль</label>
+                    <select
+                        class="form-control"
+                        data-style="btn btn-link"
+                        id="role"
+                        value="<%= student.role %>"
+                        disabled
+                    >
+                      <option>Ученик</option>
+                      <option>Родитель</option>
+                    </select>
+                  </div>
+                  <div
+                      v-for="(contact, counter) in form.Contacts"
+                      v-bind:key="counter"
+                  >
+                    <a>{{counter+1}}. Контакт:</a>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Тип контакта*:</label>
+                          <select
+                              class="form-control"
+                              data-style="btn btn-link"
+                              v-model="contact.contactTypeId"
+                              disabled
+                          >
+                            <option
+                                v-for="contactType in contactTypes"
+                                type="hidden"
+                                :value="contactType.id"
+                            >
+                              {{ contactType.name }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Значение*</label>
+                          <input
+                              type="text"
+                              class="form-control"
+                              v-model="contact.value"
+                              disabled
+                          >
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Описание:</label>
+                          <input type="text" class="form-control" v-model="contact.description" disabled>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                    </div>
+                  </div>
+                  <button @click="studentProfileEdit(<%= student.id %>)" class="btn btn-primary">Изменить</button>
+                  <div class="clearfix"></div>
                 </div>
               </div>
             </div>
-
-            <div class="col-md-8">
-             <div class="card">
-                <div class="card-header card-header-primary">
-                    <h4 class="card-title">Информация</h4>
-                       </div>
-                          <div class="card-body">
-                          <div id ="student">
-
-
-                                              <div class="row">
-                                                <div class="col-md-4">
-                                                  <div class="form-group">
-                                                    <label class="bmd-label-floating">Имя</label>
-
-                                                    <input type="text" class="form-control" value="<%= student.firstName%>" disabled>
-                                                  </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                  <div class="form-group">
-                                                    <label class="bmd-label-floating">Фамилия</label>
-                                                    <input type="text" class="form-control" value="<%= student.lastName%>" disabled>
-                                                  </div>
-                                                </div>
-                                                 <div class="col-md-4">
-                                                   <div class="form-group">
-                                                     <label class="bmd-label-floating">Отчество</label>
-                                                       <input type="text" class="form-control" value="<%= student.middleName%>" disabled>
-                                                   </div>
-                                                 </div>
-                                              </div>
-
-                                                <div class="form-group">
-                                                  <label for="role">Роль</label>
-                                                  <select class="form-control" data-style="btn btn-link" id="role" value="<%= student.role%>" disabled>
-                                                    <option>Ученик</option>
-                                                    <option>Родитель</option>
-                                                  </select>
-                                                </div>
-
-                                              <div
-                                                                                            v-for="(contact, counter) in form.Contacts"
-                                                                                            v-bind:key="counter">
-
-                                                                                              <a>{{counter+1}}. Контакт:</a>
-
-                                                                                              <div class="row">
-                                                                                              <div class="col-md-4">
-                                                                                              <div class="form-group">
-                                                                                              <label class="bmd-label-floating">Тип контакта*:</label>
-                                                                                                     <select class="form-control" data-style="btn btn-link" v-model="contact.contactTypeId" disabled>
-                                                                                                     <option v-for="contactType in contactTypes" type="hidden" :value="contactType.id">
-                                                                                                         {{ contactType.name }}
-                                                                                                     </option>
-                                                                                                     </select>
-                                                                                              </div>
-                                                                                              </div>
-
-
-
-                                                                                              <div class="col-md-4">
-                                                                                              <div class="form-group">
-                                                                                              <label class="bmd-label-floating">Значение*</label>
-                                                                                              <input type="text" class="form-control" v-model="contact.value" disabled>
-
-                                                                                              </div>
-                                                                                              </div>
-
-
-
-                                                                                              <div class="col-md-4">
-                                                                                              <div class="form-group">
-                                                                                              <label class="bmd-label-floating">Описание:</label>
-                                                                                              <input type="text" class="form-control" v-model="contact.description" disabled>
-                                                                                              </div>
-                                                                                              </div>
-                                                                                              </div>
-
-                                                                                            </div>
-
-                                                                  <div class="row">
-                                                                  <div class="col-md-12">
-
-                                                                  </div>
-                                                                  </div>
-
-
-
-                                              <button @click="studentProfileEdit(<%=student.id%>)" class="btn btn-primary">Изменить</button>
-                                              <div class="clearfix"></div>
-
-
-                          </div>
-                          </div>
-                          </div>
-                        </div>
-
-
-
           </div>
         </div>
       </div>
-      <%- include('components/footer') %>
     </div>
+    <%- include('components/footer') %>
   </div>
-  <%- include('components/fixed-plugin') %>
-  <%- include('components/scripts') %>
+</div>
+<%- include('components/fixed-plugin') %>
+<%- include('components/scripts') %>
 </body>
 </html>

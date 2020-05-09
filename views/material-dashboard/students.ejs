@@ -23,93 +23,68 @@ The above copyright notice and this permission notice shall be included in all c
 </head>
 
 <body class="">
-  <div class="wrapper ">
-    <%- include('components/sidebar', { user: user, page }) %>
-    <div class="main-panel">
-      <%- include('components/navbar', { title }) %>
-      <div class="content">
-
-
-    <div id ="student">
-    <div class="container-fluid">
-    <button @click="addNewStudent()" class="btn btn-primary btn-round">Добавить ученика</button>
-
-    <div class="row">
-        <template v-for="student in students">
+<div class="wrapper ">
+  <%- include('components/sidebar', { user: user, page }) %>
+  <div class="main-panel">
+    <%- include('components/navbar', { title }) %>
+    <div class="content">
+      <div id="student">
+        <div class="container-fluid">
+          <button @click="addNewStudent()" class="btn btn-primary btn-round">Добавить ученика</button>
+          <div class="row">
+            <template v-for="student in students">
+              <div class="col-md-4">
+                <div class="card card-profile">
+                  <div class="card-avatar">
+                    <img class="img" :src="student.photoUrl || '/images/default-user.png'"/>
+                  </div>
+                  <div class="card-body">
+                    <h6 class="card-category text-gray">{{ student.role }}</h6>
+                    <h4 class="card-title">{{ `${student.firstName} ${student.lastName || ''}` }}</h4>
+                  </div>
+                  <div class="row">
                     <div class="col-md-4">
-                      <div class="card card-profile">
-                        <div class="card-avatar">
-                             <img class="img" :src="student.photoUrl"/>
-                        </div>
-                        <div class="card-body">
-                          <h6 class="card-category text-gray">{{ student.role }}</h6>
-                          <h4 class="card-title">{{ `${student.firstName} ${student.lastName || ''}` }}</h4>
-                        </div>
-
-                         <div class="row">
-                            <div class="col-md-4">
-                            <button @click="studentProfile(student.id)" type="button" rel="tooltip" class="btn btn-info btn-sm">
-                                                                    <i class="material-icons">person</i>
-                            </button>
-                            </div>
-                                           <div class="col-md-4">
-                                                                <button @click ="studentProfileEdit(student.id)" type="button" rel="tooltip" class="btn btn-success btn-sm">
-                                                                    <i class="material-icons">edit</i>
-                                                                </button>
-                                           </div>
-                                                     <div class="col-md-4">
-                                                                <button @click = "removeStudent(student.id)" type="button" rel="tooltip" class="btn btn-danger btn-sm">
-                                                                    <i class="material-icons">close</i>
-                                                                </button>
-                                                     </div>
-
-                          </div>
-
-                      </div>
+                      <button
+                          @click="studentProfile(student.id)"
+                          type="button"
+                          rel="tooltip"
+                          class="btn btn-info btn-sm"
+                      >
+                        <i class="material-icons">person</i>
+                      </button>
                     </div>
-                    </template>
-         </div>
-
-    </div>
-
-     <!-- <table class="table">
-          <thead>
-              <tr>
-                  <th class="text-center">#</th>
-                  <th>Имя</th>
-                  <th>Роль</th>
-                  <th class="text-right">Действие</th>
-              </tr>
-          </thead>
-
-
-          <tbody>
-          <template v-for="student in students">
-            <tr>
-               <td>{{student.id}}</td>
-               <td>{{student.firstName}} {{student.lastName}} {{student.middleName}}</td>
-               <td>{{student.role}}</td>
-                  <td class="td-actions text-right">
-                      <button @click="studentProfile(student.id)" type="button" rel="tooltip" class="btn btn-info">
-                          <i class="material-icons">person</i>
+                    <div class="col-md-4">
+                      <button
+                          @click="studentProfileEdit(student.id)"
+                          type="button"
+                          rel="tooltip"
+                          class="btn btn-success btn-sm"
+                      >
+                        <i class="material-icons">edit</i>
                       </button>
-                      <button @click ="studentProfileEdit(student.id)" type="button" rel="tooltip" class="btn btn-success">
-                          <i class="material-icons">edit</i>
+                    </div>
+                    <div class="col-md-4">
+                      <button
+                          @click="removeStudent(student.id)"
+                          type="button"
+                          rel="tooltip"
+                          class="btn btn-danger btn-sm"
+                      >
+                        <i class="material-icons">close</i>
                       </button>
-                      <button @click = "removeStudent(student.id)" type="button" rel="tooltip" class="btn btn-danger">
-                          <i class="material-icons">close</i>
-                      </button>
-                  </td>
-              </tr>
-              </template>
-          </tbody>
-      </table> -->
-</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </template>
+          </div>
+        </div>
       </div>
-      <%- include('components/footer') %>
     </div>
+    <%- include('components/footer') %>
   </div>
-  <%- include('components/fixed-plugin') %>
-  <%- include('components/scripts') %>
+</div>
+<%- include('components/fixed-plugin') %>
+<%- include('components/scripts') %>
 </body>
 </html>

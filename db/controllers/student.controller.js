@@ -1,5 +1,9 @@
 const { Student, Contact } = require('~root/db/models');
 
+const updatePhoto = (photoFile) => {
+
+};
+
 exports.get = (studentId) => {
   return Student.findByPk(studentId, {
     where: {
@@ -27,8 +31,16 @@ exports.list = (tutorId) => {
   });
 };
 
-exports.create = (data) => {
-  return Student.create(data);
+exports.create = async (data) => {
+  let student = await Student.create(data);
+  const newPhotoUrl = data.photoUrl === '' ? `/images/avatars/${student.id}.jpg` : data.photoUrl;
+  await exports.update(student.id, { photoUrl: newPhotoUrl });
+  if (data.Contacts.length > 0) {
+    data.Contacts.forEach(contact => contact.studentId = student.id);
+    await exports.bulkCreate(data.Contacts);
+  }
+
+  return student;
 };
 
 exports.bulkCreate = (data) => {
