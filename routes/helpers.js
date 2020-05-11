@@ -1,4 +1,4 @@
-const userController = require('../db/controllers/user.controller');
+const userController = require('~root/db/controllers/user.controller');
 
 exports.ensureAuthenticated = async (req, res, next) => {
   if (req.isAuthenticated()) {

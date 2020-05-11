@@ -5,15 +5,22 @@
   "scripts": {
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
+    "postinstall": "link-module-alias",
     "db:rebuild": "sequelize db:drop && sequelize db:create && sequelize db:migrate && sequelize db:seed:all"
   },
+  "_moduleAliases": {
+    "~root": "."
+  },
   "dependencies": {
+    "app-root-path": "^3.0.0",
     "cookie-session": "^1.4.0",
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
     "ejs": "~2.6.1",
     "express": "~4.16.1",
+    "express-fileupload": "^1.1.7-alpha.3",
     "http-errors": "~1.6.3",
+    "jimp": "^0.10.3",
     "morgan": "~1.9.1",
     "node-sass": "^4.13.1",
     "node-sass-middleware": "^0.11.0",
@@ -27,6 +34,7 @@
     "vue-table-dynamic": "^0.2.1"
   },
   "devDependencies": {
+    "link-module-alias": "^1.2.0",
     "nodemon": "^2.0.3",
     "sequelize-cli": "^5.5.1"
   }
