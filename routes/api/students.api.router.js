@@ -1,9 +1,6 @@
 let express = require('express');
 let router = express.Router();
-let appRoot = require('app-root-path');
-let path = require('path');
 let helpers = require('~root/routes/helpers');
-let jimp = require('jimp');
 
 const studentController = require('~root/db/controllers/student.controller');
 const contactController = require('~root/db/controllers/contact.controller');
@@ -57,23 +54,12 @@ router.delete('/delete/:id', helpers.ensureAuthenticatedApi, async (req, res) =>
   res.status(200).json({ message: 'Student has been deleted' });
 })
 
-router.post('/saveImage/:id', helpers.ensureAuthenticatedApi, async (req, res) => {
+router.post('/updatePhoto/:id', helpers.ensureAuthenticatedApi, async (req, res) => {
   if (!req.files || Object.keys(req.files).length === 0) {
-    return res.status(400).send('No files were uploaded.');
+    return res.status(400).json({ message: 'No files were uploaded.' });
   }
-  const fileInput = req.files.fileInput;
-
-  jimp.read(fileInput.data, (err, image) => {
-    if (err) throw err;
-    let len = image.bitmap.height < image.bitmap.width ? image.bitmap.height : image.bitmap.width;
-    let fixHeight = len == image.bitmap.height ? false : true;
-    let x = fixHeight ? 0 : image.bitmap.width / 2 - len / 2;
-    let y = fixHeight ? image.bitmap.height / 2 - len / 2 : 0;
-    image
-      .crop(x, y, len, len)
-      .quality(60)
-      .write(path.join(appRoot.path, 'public', 'images', 'avatars', `${req.params.id}.jpg`));
-  })
+  const [code, message] = await studentController.updatePhoto(req.params.id, req.files.fileInput);
+  res.status(code).json(message)
 })
 
 router.get('/contact-types', async (req, res) => {

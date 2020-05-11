@@ -1,7 +1,27 @@
 const { Student, Contact, ContactType } = require('~root/db/models');
 
-function updatePhoto(photoFile) {
+let path = require('path');
+let appRoot = require('app-root-path');
+let jimp = require('jimp');
 
+exports.updatePhoto = async (studentId, fileInput) => {
+  try {
+    await jimp.read(fileInput.data, (err, image) => {
+      if (err) throw err;
+      let len = image.bitmap.height < image.bitmap.width ? image.bitmap.height : image.bitmap.width;
+      let fixHeight = len !== image.bitmap.height;
+      let x = fixHeight ? 0 : image.bitmap.width / 2 - len / 2;
+      let y = fixHeight ? image.bitmap.height / 2 - len / 2 : 0;
+      image
+        .crop(x, y, len, len)
+        .quality(60)
+        .write(path.join(appRoot.path, 'public', 'images', 'avatars', `${studentId}.jpg`));
+    })
+
+    return [200, { message: 'File has been uploaded successfully' }];
+  } catch (e) {
+    return [400, { message: e }];
+  }
 }
 
 exports.get = (studentId) => {

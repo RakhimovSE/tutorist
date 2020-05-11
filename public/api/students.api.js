@@ -62,10 +62,10 @@ new Vue({
       this.contactTypes = await request('/api/students/contact-types', 'GET');
     },
     studentProfile(id) {
-      return `/students/${id}`;
+      location.href = `/students/${id}`;
     },
     studentProfileEdit(id) {
-      return `/students/${id}/edit`;
+      location.href = `/students/${id}/edit`;
     },
     async addStudentToDb() {
       const { ...students } = this.form;
@@ -75,7 +75,7 @@ new Vue({
         students.photoUrl = '';
       let student = await request('/api/students/create', 'POST', students);
       if (!students.photoUrl)
-        fetch(`/api/students/saveImage/${student.id}`, {
+        fetch(`/api/students/updatePhoto/${student.id}`, {
           method: 'POST',
           body: this.formData
         })
@@ -86,7 +86,7 @@ new Vue({
       const { ...students } = this.form;
       await request(`/api/students/update/${id}`, 'PUT', students);
       if (this.formData)
-        fetch(`/api/students/saveImage/${this.form.id}`, {
+        fetch(`/api/students/updatePhoto/${this.form.id}`, {
           method: 'POST',
           body: this.formData
         })
@@ -94,9 +94,7 @@ new Vue({
           .then(data => console.log(data.path))
           .catch(error => console.log(error))
     },
-    async removeStudent(e, id) {
-      e.preventDefault();
-
+    async removeStudent(id) {
       await request(`/api/students/delete/${id}`, 'DELETE')
       request('api/students', 'GET')
         .then(response => this.students = response)

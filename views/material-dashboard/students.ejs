@@ -33,43 +33,49 @@ The above copyright notice and this permission notice shall be included in all c
           <div class="row">
             <template v-for="student in students">
               <div class="col-md-4">
-                <a :href="studentProfile(student.id)">
-                  <div class="card card-profile card-profile__student">
-                    <div class="card-avatar">
-                      <img class="img" :src="student.photoUrl || '/images/default-user.png'"/>
-                    </div>
-                    <div class="card-body">
-                      <h6 class="card-category text-gray">{{ student.role }}</h6>
-                      <h4 class="card-title">{{ student.fullName }}</h4>
-                      <p class="card-description">
-                        <span v-for="i in 2">
-                          <template v-if="student.Contacts[i]">
-                            {{ student.Contacts[i].ContactType.name }}: {{ student.Contacts[i].value }}
-                          </template>
-                          <template v-else>&nbsp;</template>
-                        </span>
-                      </p>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <button
-                              :href="studentProfileEdit(student.id)"
-                              class="btn btn-success"
-                          >
-                            <i class="material-icons">edit</i> Изменить
-                          </button>
-                        </div>
-                        <div class="col-md-6">
-                          <button
-                              @click="e => removeStudent(e, student.id)"
-                              class="btn btn-danger"
-                          >
-                            <i class="material-icons">close</i> Удалить
-                          </button>
-                        </div>
+                <div class="card card-profile card-profile__student">
+                  <div class="card-avatar">
+                    <img class="img" :src="student.photoUrl || '/images/default-user.png'"/>
+                  </div>
+                  <div class="card-body">
+                    <h6 class="card-category text-gray">{{ student.role }}</h6>
+                    <h4 class="card-title">{{ student.fullName }}</h4>
+                    <p class="card-description">
+                      <span v-for="i in 2">
+                        <template v-if="student.Contacts[i]">
+                          {{ student.Contacts[i].ContactType.name }}: {{ student.Contacts[i].value }}
+                        </template>
+                        <template v-else>&nbsp;</template>
+                      </span>
+                    </p>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <button
+                            @click="studentProfile(student.id)"
+                            class="btn btn-info btn-just-icon"
+                        >
+                          <i class="material-icons">person</i>
+                        </button>
+                      </div>
+                      <div class="col-md-4">
+                        <button
+                            @click="studentProfileEdit(student.id)"
+                            class="btn btn-success btn-just-icon"
+                        >
+                          <i class="material-icons">edit</i>
+                        </button>
+                      </div>
+                      <div class="col-md-4">
+                        <button
+                            @click="removeStudent(student.id)"
+                            class="btn btn-danger btn-just-icon"
+                        >
+                          <i class="material-icons">close</i>
+                        </button>
                       </div>
                     </div>
                   </div>
-                </a>
+                </div>
               </div>
             </template>
           </div>
