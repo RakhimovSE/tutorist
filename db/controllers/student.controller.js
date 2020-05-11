@@ -1,4 +1,4 @@
-const { Student, Contact } = require('~root/db/models');
+const { Student, Contact, ContactType } = require('~root/db/models');
 
 function updatePhoto(photoFile) {
 
@@ -16,7 +16,9 @@ exports.get = (studentId) => {
         deleted: false,
         archived: false
       },
-      required: false
+      required: false,
+      order: ['contactTypeId'],
+      include: { model: ContactType }
     }]
   });
 };
@@ -28,6 +30,15 @@ exports.list = (tutorId) => {
       deleted: false,
       archived: false
     },
+    include: [{
+      model: Contact,
+      where: {
+        deleted: false,
+        archived: false
+      },
+      required: false,
+      include: { model: ContactType }
+    }],
     order: ['firstName']
   });
 };

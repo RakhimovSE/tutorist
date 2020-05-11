@@ -57,20 +57,15 @@ new Vue({
     removeImage: function (e) {
       this.image = '';
     },
-    fetchData() {
-      request('/api/students', 'GET', null)
-        .then((response) => this.students = response);
-      request('/api/students/contact-types', 'GET', null)
-        .then((response) => this.contactTypes = response);
+    async fetchData() {
+      this.students = await request('/api/students', 'GET');
+      this.contactTypes = await request('/api/students/contact-types', 'GET');
     },
-    async studentProfile(id) {
-      location.href = `/students/${id}`;
+    studentProfile(id) {
+      return `/students/${id}`;
     },
-    async studentProfileEdit(id) {
-      location.href = `/students/${id}/edit`
-    },
-    async addNewStudent() {
-      location.href = '/students/new';
+    studentProfileEdit(id) {
+      return `/students/${id}/edit`;
     },
     async addStudentToDb() {
       const { ...students } = this.form;
@@ -99,7 +94,9 @@ new Vue({
           .then(data => console.log(data.path))
           .catch(error => console.log(error))
     },
-    async removeStudent(id) {
+    async removeStudent(e, id) {
+      e.preventDefault();
+
       await request(`/api/students/delete/${id}`, 'DELETE')
       request('api/students', 'GET')
         .then(response => this.students = response)
