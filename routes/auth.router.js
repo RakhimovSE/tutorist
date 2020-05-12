@@ -4,7 +4,7 @@ const router = express.Router();
 const passport = require('passport');
 const helpers = require('./helpers');
 
-const userController = require('../db/controllers/user.controller');
+const userController = require('~root/db/controllers/user.controller');
 
 const { Strategy: GoogleStrategy } = require('passport-google-oauth20');
 const { Strategy: VKontakteStrategy } = require('passport-vkontakte');

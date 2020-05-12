@@ -5,10 +5,10 @@
  */
 
 require('dotenv').config();
-let app = require('../app');
+let app = require('~root/app');
 let debug = require('debug')('tutorist:server');
 let http = require('http');
-let { sequelize } = require('../db/models/index');
+let { sequelize } = require('~root/db/models');
 
 /**
  * Get port from environment and store in Express.

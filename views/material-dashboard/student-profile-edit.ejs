@@ -1,5 +1,5 @@
 <%
-let title = `Правка: ${student.firstName} ${student.lastName} ${student.middleName}`;
+let title = `Правка: ${student.fullName}`;
 let page = 'students';
 %>
 <!--
@@ -19,110 +19,203 @@ The above copyright notice and this permission notice shall be included in all c
 <head>
   <link rel='stylesheet' href='/stylesheets/material-dashboard.css'/>
   <%- include('../components/meta', { title }) %>
-  <script type="module" src="../../../api/students.api.js"></script>
+  <script>
+    let student = <%- JSON.stringify(student) %>;
+  </script>
+  <script type="module" src="/api/students.api.js"></script>
 </head>
 
 <body class="">
-  <div class="wrapper ">
-    <%- include('components/sidebar', { user: user, page }) %>
-    <div class="main-panel">
-      <%- include('components/navbar', { title }) %>
-      <div class="content">
-
-
+<div class="wrapper ">
+  <%- include('components/sidebar', { user: user, page }) %>
+  <div class="main-panel">
+    <%- include('components/navbar', { title }) %>
+    <div class="content">
+      <div id="student">
         <div class="container-fluid">
           <div class="row">
-
             <div class="col-md-4">
               <div class="card card-profile">
                 <div class="card-avatar">
-                  <a href="javascript:;">
-                    <img class="img" src=<%= user.photoUrl %> />
-                  </a>
+                  <div v-if="!image">
+                    <img class="img" src="<%= student.photoUrl || '/images/default-user.png' %>"/>
+                  </div>
+                  <div v-else>
+                    <img class="img" :src="image"/>
+                  </div>
                 </div>
                 <div class="card-body">
-                  <h6 class="card-category text-gray">CEO / Co-Founder</h6>
-                  <h4 class="card-title"><%= `${user.firstName} ${user.lastName || ''}` %></h4>
-                  <p class="card-description">
-                    Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
-                  </p>
-                  <a href="javascript:;" class="btn btn-primary btn-round">Follow</a>
+                  <h6 class="card-category text-gray"><%= student.role %></h6>
+                  <h4 class="card-title"><%= student.fullName %></h4>
                 </div>
               </div>
             </div>
-
             <div class="col-md-8">
-             <div class="card">
+              <div class="card">
                 <div class="card-header card-header-primary">
-                    <h4 class="card-title">Информация</h4>
-                       </div>
-                          <div class="card-body">
-                          <div id ="student">
-                                             <form @submit.prevent="changeStudent(<%= student.id %>)">
-                                              <div class="row">
-                                                <div class="col-md-4">
-                                                  <div class="form-group">
-                                                    <label class="bmd-label-floating">Имя</label>
-
-                                                    <input type="text" class="form-control" value="<%= student.firstName%>" v-model="form.firstName" required>
-                                                  </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                  <div class="form-group">
-                                                    <label class="bmd-label-floating">Фамилия</label>
-                                                    <input type="text" class="form-control" value="<%= student.lastName%>" v-model="form.lastName">
-                                                  </div>
-                                                </div>
-                                                 <div class="col-md-4">
-                                                   <div class="form-group">
-                                                     <label class="bmd-label-floating">Отчество</label>
-                                                       <input type="text" class="form-control" value="<%= student.middleName%>" v-model="form.middleName">
-                                                   </div>
-                                                 </div>
-                                              </div>
-
-                                                <div class="form-group">
-                                                  <label for="role">Роль</label>
-                                                  <select class="form-control" data-style="btn btn-link" id="role" value="<%= student.role%>" v-model="form.role">
-                                                    <option value="student">Ученик</option>
-                                                    <option value="parent">Родитель</option>
-                                                  </select>
-                                                </div>
-
-                                              <div class="row">
-                                                <div class="col-md-12">
-                                                  <div class="form-group form-file-upload form-file-multiple">
-                                                      <input type="file" multiple="" class="inputFileHidden">
-                                                      <div class="input-group">
-                                                          <input type="text" class="form-control inputFileVisible" placeholder="Upload photo">
-                                                          <span class="input-group-btn">
-                                                              <button type="button" class="btn btn-fab btn-round btn-primary">
-                                                                  <i class="material-icons">attach_file</i>
-                                                              </button>
-                                                          </span>
-                                                      </div>
-                                                    </div>
-                                                </div>
-                                              </div>
-                                              <input type="submit" class="btn btn-primary pull-right" value="Сохранить">
-                                              <div class="clearfix"></div>
-                                              </form>
-
-
-                          </div>
-                          </div>
+                  <h4 class="card-title">Информация</h4>
+                </div>
+                <div class="card-body">
+                  <form @submit.prevent="changeStudent(<%= student.id %>)">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Имя</label>
+                          <input
+                              type="text"
+                              class="form-control"
+                              value="<%= student.firstName %>"
+                              v-model="form.firstName"
+                          >
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Фамилия</label>
+                          <input
+                              type="text"
+                              class="form-control"
+                              value="<%= student.lastName %>"
+                              v-model="form.lastName"
+                          >
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Отчество</label>
+                          <input
+                              type="text"
+                              class="form-control"
+                              value="<%= student.middleName %>"
+                              v-model="form.middleName"
+                          >
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group form-file-upload form-file-multiple">
+                      <input
+                          name="fileInput"
+                          id="fileInput"
+                          type="file"
+                          accept="image/x-png,image/gif,image/jpeg,image/bmp,image/tiff"
+                          @change="onFileChange"
+                          style="display:none;"
+                      />
+                      <div class="input-group">
+                        <input
+                            type="text"
+                            class="form-control inputFileVisible"
+                            v-model="fileName"
+                            disabled
+                        >
+                        <span class="input-group-btn">
+                          <button
+                              onclick="document.getElementById('fileInput').click();"
+                              type="button"
+                              class="btn btn-fab btn-round btn-primary"
+                          >
+                            <i class="material-icons">attach_file</i>
+                          </button>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="role">Роль*</label>
+                      <select
+                          class="form-control"
+                          data-style="btn btn-link"
+                          id="role"
+                          value="<%= student.role %>"
+                          v-model="form.role" required
+                      >
+                        <option value="student">Ученик</option>
+                        <option value="parent">Родитель</option>
+                      </select>
+                    </div>
+                    <div
+                        v-for="(contact, counter) in form.Contacts"
+                        v-bind:key="counter"
+                    >
+                      <a>{{counter+1}}. Контакт</a>
+                      <button
+                          @click="deleteContact(counter)"
+                          type="button"
+                          rel="tooltip"
+                          class="btn-small btn-danger"
+                      >
+                        <i class="material-icons">close</i>
+                      </button>
+                      <div class="row">
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label class="bmd-label-floating">Тип контакта*:</label>
+                            <select
+                                class="form-control"
+                                data-style="btn btn-link"
+                                v-model="contact.contactTypeId"
+                                required
+                            >
+                              <option
+                                  v-for="contactType in contactTypes"
+                                  type="hidden"
+                                  :value="contactType.id"
+                              >
+                                {{ contactType.name }}
+                              </option>
+                            </select>
                           </div>
                         </div>
-
-
-
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label class="bmd-label-floating">Значение*</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                v-model="contact.value"
+                                required
+                            >
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label class="bmd-label-floating">Описание:</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                v-model="contact.description"
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <button
+                            class="btn btn-primary pull-right"
+                            @click="addContact"
+                        >
+                          Добавить контакт
+                        </button>
+                      </div>
+                    </div>
+                    <input
+                        type="submit"
+                        class="btn btn-primary pull-right"
+                        value="Сохранить"
+                    >
+                    <div class="clearfix"></div>
+                  </form>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <%- include('components/footer') %>
     </div>
+    <%- include('components/footer') %>
   </div>
-  <%- include('components/fixed-plugin') %>
-  <%- include('components/scripts') %>
+</div>
+<%- include('components/fixed-plugin') %>
+<%- include('components/scripts') %>
 </body>
 </html>

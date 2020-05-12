@@ -1,4 +1,4 @@
-const { User } = require('../models');
+const { User } = require('~root/db/models');
 
 const getSerializedProfile = {
   'google': profile => (

@@ -5,6 +5,7 @@ let path = require('path');
 let cookieSession = require('cookie-session')
 let passport = require('passport');
 let logger = require('morgan');
+let fileUpload = require('express-fileupload')
 
 /*****************/
 /** VIEW ROUTER **/
@@ -16,7 +17,6 @@ let studentsRouter = require('./routes/students.router');
 /****************/
 /** API ROUTER **/
 /****************/
-let apiRouter = require('./routes/api.router')
 let studentsApiRouter = require('./routes/api/students.api.router');
 let profileApiRouter = require('./routes/api/tutor.api.router');
 
@@ -37,6 +37,7 @@ app.use(sassMiddleware({
   sourceMap: true
 }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(fileUpload());
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -44,7 +45,6 @@ app.use(passport.session());
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/students', studentsRouter);
-app.use('/api', apiRouter);
 app.use('/api/students', studentsApiRouter);
 app.use('/api/users', profileApiRouter);
 

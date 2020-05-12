@@ -4,6 +4,15 @@ module.exports = (sequelize, DataTypes) => {
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
     middleName: DataTypes.STRING,
+    fullName: {
+      type: DataTypes.VIRTUAL,
+      get() {
+        const fullName = [this.firstName];
+        if (this.middleName) fullName.push(this.middleName);
+        if (this.lastName) fullName.push(this.lastName);
+        return fullName.join(' ');
+      }
+    },
     photoUrl: DataTypes.STRING,
     role: DataTypes.STRING,
     tutorId: DataTypes.INTEGER,

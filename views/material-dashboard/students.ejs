@@ -19,158 +19,73 @@ The above copyright notice and this permission notice shall be included in all c
 <head>
   <link rel='stylesheet' href='/stylesheets/material-dashboard.css'/>
   <%- include('../components/meta', { title }) %>
-  <script type="module" src="../../../api/students.api.js"></script>
+  <script type="module" src="/api/students.api.js"></script>
 </head>
 
 <body class="">
-  <div class="wrapper ">
-    <%- include('components/sidebar', { user: user, page }) %>
-    <div class="main-panel">
-      <%- include('components/navbar', { title }) %>
-      <div class="content">
-          <div class="container-fluid">
-              <div class="row">
-                  <div class="col-md-12">
-      <div class="card">
-                      <div class="card-header card-header-primary">
-                        <h4 class="card-title">Ученики</h4>
-                      </div>
-    <div class="card-body">
-
-    <div id ="student">
-      <table class="table">
-          <thead>
-              <tr>
-                  <th class="text-center">#</th>
-                  <th>Имя</th>
-                  <th>Роль</th>
-                  <th class="text-right">Действие</th>
-              </tr>
-          </thead>
-
-
-          <tbody>
-          <template v-for="student in students">
-            <tr>
-               <td>{{student.id}}</td>
-               <td>{{student.firstName}} {{student.lastName}} {{student.middleName}}</td>
-               <td>{{student.role}}</td>
-                  <td class="td-actions text-right">
-                      <button @click="studentProfile(student.id)" type="button" rel="tooltip" class="btn btn-info">
-                          <i class="material-icons">person</i>
-                      </button>
-                      <button @click ="studentProfileEdit(student.id)" type="button" rel="tooltip" class="btn btn-success">
-                          <i class="material-icons">edit</i>
-                      </button>
-                      <button @click = "removeStudent(student.id)" type="button" rel="tooltip" class="btn btn-danger">
-                          <i class="material-icons">close</i>
-                      </button>
-                  </td>
-              </tr>
-              </template>
-          </tbody>
-      </table>
-      <button @click="addNewStudent()" class="btn btn-primary btn-round">Добавить ученика</button>
-      </div>
-      </div>
-</div>
-                  </div>
-              </div>
-          </div>
-
-
-<!--
+<div class="wrapper ">
+  <%- include('components/sidebar', { user: user, page }) %>
+  <div class="main-panel">
+    <%- include('components/navbar', { title, page }) %>
+    <div class="content">
+      <div id="student">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-md-8">
-              <div class="card">
-                <div class="card-header card-header-primary">
-                  <h4 class="card-title">Добавить ученика</h4>
-                  <p class="card-category">Введите данные</p>
-                </div>
-                <div class="card-body">
-
-
-                  <form @submit.prevent="addStudent">
+            <template v-for="student in students">
+              <div class="col-md-4">
+                <div class="card card-profile card-profile__student">
+                  <div class="card-avatar">
+                    <img class="img" :src="student.photoUrl || '/images/default-user.png'"/>
+                  </div>
+                  <div class="card-body">
+                    <h6 class="card-category text-gray">{{ student.role }}</h6>
+                    <h4 class="card-title">{{ student.fullName }}</h4>
+                    <p class="card-description">
+                      <span v-for="i in 2">
+                        <template v-if="student.Contacts[i]">
+                          {{ student.Contacts[i].ContactType.name }}: {{ student.Contacts[i].value }}
+                        </template>
+                        <template v-else>&nbsp;</template>
+                      </span>
+                    </p>
                     <div class="row">
                       <div class="col-md-4">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Имя*</label>
-                          <input type="text" class="form-control" v-model="form.firstName" required>
-                        </div>
+                        <button
+                            @click="studentProfile(student.id)"
+                            class="btn btn-info btn-just-icon"
+                        >
+                          <i class="material-icons">person</i>
+                        </button>
                       </div>
                       <div class="col-md-4">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Фамилия</label>
-                          <input type="text" class="form-control" v-model="form.lastName">
-                        </div>
+                        <button
+                            @click="studentProfileEdit(student.id)"
+                            class="btn btn-success btn-just-icon"
+                        >
+                          <i class="material-icons">edit</i>
+                        </button>
                       </div>
-                       <div class="col-md-4">
-                         <div class="form-group">
-                           <label class="bmd-label-floating">Отчество</label>
-                             <input type="text" class="form-control" v-model="form.middleName">
-                         </div>
-                       </div>
-                    </div>
-
-                      <div class="form-group">
-                        <label for="role">Роль</label>
-                        <select class="form-control" data-style="btn btn-link" id="role" v-model="form.role">
-                          <option>Ученик</option>
-                          <option>Родитель</option>
-                        </select>
-                      </div>
-
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="form-group form-file-upload form-file-multiple">
-                            <input type="file" multiple="" class="inputFileHidden">
-                            <div class="input-group">
-                                <input type="text" class="form-control inputFileVisible" placeholder="Upload photo">
-                                <span class="input-group-btn">
-                                    <button type="button" class="btn btn-fab btn-round btn-primary">
-                                        <i class="material-icons">attach_file</i>
-                                    </button>
-                                </span>
-                            </div>
-                          </div>
+                      <div class="col-md-4">
+                        <button
+                            @click="removeStudent(student.id)"
+                            class="btn btn-danger btn-just-icon"
+                        >
+                          <i class="material-icons">close</i>
+                        </button>
                       </div>
                     </div>
-
-
-                    <input type="submit" class="btn btn-primary pull-right" value="Create">
-                    <div class="clearfix"></div>
-                  </form>
-
-
+                  </div>
                 </div>
               </div>
-            </div>
-
-            <div class="col-md-4">
-              <div class="card card-profile">
-                <div class="card-avatar">
-                  <a href="javascript:;">
-                    <img class="img" src=<%= user.photoUrl %> />
-                  </a>
-                </div>
-                <div class="card-body">
-                  <h6 class="card-category text-gray">CEO / Co-Founder</h6>
-                  <h4 class="card-title"><%= `${user.firstName} ${user.lastName || ''}` %></h4>
-                  <p class="card-description">
-                    Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
-                  </p>
-                  <a href="javascript:;" class="btn btn-primary btn-round">Follow</a>
-                </div>
-              </div>
-            </div>
+            </template>
           </div>
-        </div>-->
+        </div>
       </div>
-      <%- include('components/footer') %>
     </div>
+    <%- include('components/footer') %>
   </div>
-  <%- include('components/fixed-plugin') %>
-  <%- include('components/scripts') %>
+</div>
+<%- include('components/fixed-plugin') %>
+<%- include('components/scripts') %>
 </body>
 </html>
