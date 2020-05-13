@@ -1,4 +1,5 @@
 const { Student, Contact, ContactType } = require('~root/db/models');
+const contactController = require('~root/db/controllers/contact.controller');
 
 let path = require('path');
 let appRoot = require('app-root-path');
@@ -67,17 +68,11 @@ exports.create = async (data) => {
   let student = await Student.create(data);
   const newPhotoUrl = data.photoUrl === '' ? `/images/avatars/${student.id}.jpg` : data.photoUrl;
   await exports.update(student.id, { photoUrl: newPhotoUrl });
-  if (data.Contacts.length > 0) {
-    data.Contacts.forEach(contact => contact.studentId = student.id);
-    await exports.bulkCreate(data.Contacts);
-  }
+  data.Contacts.forEach(contact => contact.studentId = student.id);
+  await contactController.bulkCreate(data.Contacts);
 
   return student;
 };
-
-exports.bulkCreate = (data) => {
-  return Student.bulkCreate(data);
-}
 
 exports.update = (studentId, data) => {
   return Student.update(data, {
