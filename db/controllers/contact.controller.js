@@ -20,10 +20,6 @@ exports.create = (data) => {
     return Contact.create(data);
 };
 
-exports.bulkCreate = (data) => {
-    return Contact.bulkCreate(data);
-}
-
 exports.bulkCreate = (data, options) => {
     return Contact.bulkCreate(data, options);
 }
