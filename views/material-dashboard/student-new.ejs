@@ -41,7 +41,7 @@ The above copyright notice and this permission notice shall be included in all c
                   <p class="card-category">Введите данные</p>
                 </div>
                 <div class="card-body">
-                  <form @submit.prevent="addStudentToDb">
+                  <form @submit.prevent="addStudentToDb" @submit.prevent="addSubcategory">
                     <div class="row">
                       <div class="col-md-4">
                         <div class="form-group">
@@ -61,6 +61,25 @@ The above copyright notice and this permission notice shall be included in all c
                           <input type="text" class="form-control" v-model="form.middleName">
                         </div>
                       </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="subject">Предметы*</label>
+                      <select
+                              class="form-control"
+                              data-style="btn btn-link"
+                              id="role"
+                              v-model="form.subject"
+                              required
+                      >
+                        <option value="Математика">Математика</option>
+                        <option value="Информатика">Информатика</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="bmd-label-floating">Субкатегория предмета</label>
+                      <input
+                              type="text" class="form-control" v-model="form.subcategory"
+                      >
                     </div>
                     <div class="form-group form-file-upload form-file-multiple">
                       <input
@@ -102,16 +121,9 @@ The above copyright notice and this permission notice shall be included in all c
                         <option value="parent">Родитель</option>
                       </select>
                     </div>
+
                     <div v-for="(contact, counter) in form.Contacts" v-bind:key="counter">
                       <a>{{counter+1}}. Контакт:</a>
-                      <button
-                          @click="deleteContact(counter)"
-                          type="button"
-                          rel="tooltip"
-                          class="btn-small btn-danger"
-                      >
-                        <i class="material-icons">close</i>
-                      </button>
                       <div class="row">
                         <div class="col-md-4">
                           <div class="form-group">
@@ -143,27 +155,39 @@ The above copyright notice and this permission notice shall be included in all c
                             >
                           </div>
                         </div>
-                        <div class="col-md-4">
-                          <div class="form-group">
-                            <label class="bmd-label-floating">Описание:</label>
-                            <input type="text" class="form-control" v-model="contact.description">
+                        <div class="form-group form-file-upload form-file-multiple">
+                          <input type="file" multiple="" class="inputFileHidden">
+                          <div class="input-group">
+                            <input type="text" class="form-control " placeholder="Описание:" v-model="contact.description" multiple>
+                            <span class="input-group-btn">
+                              <button
+                                      @click="deleteContact(counter)"
+                                      type="button"
+                                      rel="tooltip"
+                                      class="btn btn-danger btn-fab btn-fab-mini btn-round"
+                              >
+                        <i class="material-icons">close</i>
+                      </button>
+                            </span>
                           </div>
                         </div>
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col-md-12">
+                      <div class="col-md-12 ">
                         <button
-                            class="btn btn-primary pull-right"
+                            class="btn btn-primary pull-right btn-block"
                             @click="addContact"
                         >
                           Добавить контакт
                         </button>
                       </div>
                     </div>
-                    <input type="submit" class="btn btn-primary pull-right" value="Создать">
+                    <input type="submit" class="btn btn-primary pull-right btn-block" value="Создать">
                     <div class="clearfix"></div>
                   </form>
+
+
                 </div>
               </div>
             </div>

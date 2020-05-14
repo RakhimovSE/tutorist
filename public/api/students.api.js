@@ -81,6 +81,7 @@ new Vue({
         })
           .then(data => console.log(data.path))
           .catch(error => console.log(error))
+      location.href = '/students'
     },
     async changeStudent(id) {
       const { ...students } = this.form;
@@ -93,6 +94,7 @@ new Vue({
           .then(response => response.json())
           .then(data => console.log(data.path))
           .catch(error => console.log(error))
+      toast('Данные успешно обновлены!')
     },
     async removeStudent(id) {
       await request(`/api/students/delete/${id}`, 'DELETE')

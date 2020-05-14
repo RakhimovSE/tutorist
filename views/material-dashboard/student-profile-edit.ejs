@@ -137,14 +137,7 @@ The above copyright notice and this permission notice shall be included in all c
                         v-bind:key="counter"
                     >
                       <a>{{counter+1}}. Контакт</a>
-                      <button
-                          @click="deleteContact(counter)"
-                          type="button"
-                          rel="tooltip"
-                          class="btn-small btn-danger"
-                      >
-                        <i class="material-icons">close</i>
-                      </button>
+                      
                       <div class="row">
                         <div class="col-md-4">
                           <div class="form-group">
@@ -176,14 +169,20 @@ The above copyright notice and this permission notice shall be included in all c
                             >
                           </div>
                         </div>
-                        <div class="col-md-4">
-                          <div class="form-group">
-                            <label class="bmd-label-floating">Описание:</label>
-                            <input
-                                type="text"
-                                class="form-control"
-                                v-model="contact.description"
-                            >
+                        <div class="form-group form-file-upload form-file-multiple">
+                          <input type="file" multiple="" class="inputFileHidden">
+                          <div class="input-group">
+                            <input type="text" class="form-control " placeholder="Описание:" v-model="contact.description" multiple>
+                            <span class="input-group-btn">
+                              <button
+                                      @click="deleteContact(counter)"
+                                      type="button"
+                                      rel="tooltip"
+                                      class="btn btn-danger btn-fab btn-fab-mini btn-round"
+                              >
+                        <i class="material-icons">close</i>
+                      </button>
+                            </span>
                           </div>
                         </div>
                       </div>
